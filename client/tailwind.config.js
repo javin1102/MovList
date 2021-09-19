@@ -6,10 +6,17 @@ module.exports = {
     fontFamily: {
       poppins: ["Poppins"],
     },
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#E73959",
+        secondary: "#EDA044",
+        tertiary: "#00A896",
+        gray: "#808080",
+      },
+    },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("tailwind-hamburgers")],
 };
