@@ -42,16 +42,6 @@ const RootQueryType = new GraphQLObjectType({
   },
 });
 
-// const RootQuery = new GraphQLObjectType({
-//   name: "RootQuery",
-//   fields: {
-//     Movies: {
-//       type: MovieQueryType,
-
-//     },
-//   },
-// });
-
 const schema = new GraphQLSchema({
   query: RootQueryType,
 });
