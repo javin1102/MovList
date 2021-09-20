@@ -10,7 +10,7 @@ const SearchBar = ({ isTop, isClickSearch }) => {
     : "-translate-y-1/2 opacity-0";
   return (
     <form
-      className={` fixed left-1/2 -translate-x-1/2 top-24 w-4/5  transition-all ${mobileSearchBarController} lg:transition-none lg:block lg:w-1/2 lg:flex-1 lg:mx-6 lg:relative lg:left-0 lg:-translate-x-0 lg:top-0 lg:-translate-y-0 lg:opacity-100`}
+      className={` fixed left-1/2 -translate-x-1/2 top-24 w-4/5 text-xs transition-all ${mobileSearchBarController} lg:text-base lg:transition-none lg:block lg:w-1/2 lg:flex-1 lg:mx-6 lg:relative lg:left-0 lg:-translate-x-0 lg:top-0 lg:-translate-y-0 lg:opacity-100`}
     >
       <input
         placeholder="Search anything..."

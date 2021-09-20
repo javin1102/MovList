@@ -3,9 +3,7 @@ import Google from "../../public/google.svg";
 import Image from "next/image";
 import Link from "next/link";
 import Search from "../../public/search.svg";
-
 import RoundedButton from "../UI/RoundedButton";
-import { isMobile } from "react-device-detect";
 import { useState } from "react";
 import NavList from "./NavList";
 import SearchBar from "../UI/SearchBar";
@@ -17,7 +15,7 @@ const Nav = () => {
   const [isOpenHamburger, setIsOpenHamburger] = useState(false);
   const [isClickSearch, setIsClickSearch] = useState(false);
 
-  const navBGColor = isTop ? "bg-[rgba(0,0,0,0.85)]" : "bg-white";
+  const navBGColor = isTop ? "bg-[rgba(24,24,24,0.8)]" : "bg-white";
 
   return (
     <>

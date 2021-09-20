@@ -1,12 +1,32 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-.slick-next {
+/* .slick-next {
   right: 20px;
   z-index: 1;
 }
 .slick-prev {
   left: 20px;
   z-index: 1;
+} */
+
+.slick-dots li.slick-active button:before {
+  color: #e73959 !important;
+  opacity: 1 !important;
+}
+
+.slick-dots li button:before {
+  opacity: 0.8;
+  color: white;
+}
+
+.slick-dots {
+  bottom: 20px;
+}
+
+.slick-dots li {
+  transform: scale(1.5);
+}
+@media only screen and (max-width: 36em) {
+  .slick-dots li {
+    margin: 0;
+    transform: scale(1);
+  }
 }
