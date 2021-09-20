@@ -1,6 +1,9 @@
-const Overlay = () => {
+const Overlay = ({ isOpenHamburger }) => {
+  const overlayController = isOpenHamburger ? "block" : "hidden";
   return (
-    <div className="fixed top-0 left-0 h-screen bg-[rgba(0,0,0,0.8)] w-full"></div>
+    <div
+      className={`${overlayController} fixed top-0 left-0 h-screen bg-[rgba(0,0,0,0.8)] w-full`}
+    ></div>
   );
 };
 
