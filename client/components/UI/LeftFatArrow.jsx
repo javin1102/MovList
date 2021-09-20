@@ -7,7 +7,7 @@ const LeftArrow = (props) => {
       viewBox="0 0 64 64"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute top-1/2 z-[1] cursor-pointer left-2 -translate-y-1/2 scale-75 lg:scale-100 lg:left-5"
+      className="absolute top-1/2 z-[1] cursor-pointer left-0 -translate-y-1/2 scale-75 lg:scale-100 lg:left-5"
       onClick={onClick}
     >
       <path
