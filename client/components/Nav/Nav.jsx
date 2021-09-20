@@ -10,7 +10,12 @@ import { useEffect, useState } from "react";
 import NavList from "./NavList";
 import SearchBar from "../UI/SearchBar";
 
-const Nav = ({ HamburgerToggleHandler, isOpenHamburger }) => {
+const Nav = ({
+  HamburgerToggleHandler,
+  isOpenHamburger,
+  searchHandler,
+  isClickSearch,
+}) => {
   const [isTop, setIsTop] = useState(true);
 
   const navBGColor = isTop ? "bg-[rgba(0,0,0,0.85)]" : "bg-white";
@@ -48,15 +53,21 @@ const Nav = ({ HamburgerToggleHandler, isOpenHamburger }) => {
 
       <div className="flex items-center ml-auto lg:flex-1 ">
         {/*Search Image for mobile*/}
-        <div className="w-6 h-6 sm:w-8 sm:h-8 relative mr-4 cursor-pointer lg:hidden">
+        <div
+          className="w-6 h-6 sm:w-8 sm:h-8 relative mr-4 cursor-pointer lg:hidden"
+          onClick={() => {
+            HamburgerToggleHandler(false);
+            searchHandler((prev) => !prev);
+          }}
+        >
           <Image src={Search} layout="fill" />
         </div>
 
-        <SearchBar isTop={isTop} />
+        <SearchBar isTop={isTop} isClickSearch={isClickSearch} />
 
         {/*Google Login Button*/}
         <RoundedButton color="tertiary">
-          <span className="w-4 h-4  mr-2 relative">
+          <span className="w-4 h-4 mr-2 relative">
             <Image src={Google} layout="fill" />
           </span>
           Sign in
@@ -72,6 +83,7 @@ const Nav = ({ HamburgerToggleHandler, isOpenHamburger }) => {
         stroke={`${isTop ? "white" : "black"}`}
         onClick={() => {
           HamburgerToggleHandler((prev) => !prev);
+          searchHandler(false);
         }}
       >
         <path
