@@ -1,4 +1,11 @@
 import Nav from "../components/Nav/Nav";
+import Overlay from "../components/UI/Overlay";
 export default function Home() {
-  return <Nav />;
+  return (
+    <>
+      <Nav />
+      <div className="min-h-[1000px]"></div>
+      <Overlay />
+    </>
+  );
 }
