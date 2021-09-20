@@ -4,8 +4,8 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <div className="min-h-[1000px]"></div>
-      <Overlay />
+      <div className="min-h-[1000px]" id="head"></div>
+      {/* <Overlay /> */}
     </>
   );
 }
