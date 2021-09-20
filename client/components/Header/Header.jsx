@@ -5,6 +5,7 @@ import Joker from "../../public/Joker.jpg";
 import Kimi from "../../public/Kimi.jpg";
 import LeftArrow from "../UI/LeftFatArrow";
 import RightArrow from "../UI/RightFatArrow";
+import HeaderMovieTitle from "./HeaderMovieTitle";
 const Header = () => {
   const settings = {
     dots: true,
@@ -12,7 +13,7 @@ const Header = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    // autoplay: true,
+    autoplay: true,
     autoplaySpeed: 4000,
     arrows: true,
     fade: true,
@@ -28,6 +29,7 @@ const Header = () => {
             className="w-full h-[300px] sm:h-[450px] lg:h-[600px] relative"
             key={index}
           >
+            <HeaderMovieTitle />
             <Image src={img.src} layout="fill" objectFit="cover" />
           </div>
         ))}

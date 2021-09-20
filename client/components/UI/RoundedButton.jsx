@@ -5,7 +5,7 @@ const RoundedButton = ({ color, children }) => {
       : "";
   return (
     <button
-      className={`flex items-center ${tertiaryColor} rounded-full border-2 sm:px-5 sm:py-2 px-3 py-1 text-sm sm:text-base font-poppins  hover:text-white  transition-colors`}
+      className={`flex items-center ${tertiaryColor} rounded-full border-[2px] px-2 py-1 font-poppins hover:text-white text-xs sm:px-5 sm:py-2 sm:text-base transition-colors`}
     >
       {children}
     </button>

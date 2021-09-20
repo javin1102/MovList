@@ -1,8 +1,8 @@
-import Logo from "../../public/logo.svg";
-import Google from "../../public/google.svg";
+import Logo from "../../public/svg/logo.svg";
+import Google from "../../public/svg/google.svg";
 import Image from "next/image";
 import Link from "next/link";
-import Search from "../../public/search.svg";
+import Search from "../../public/svg/search.svg";
 import RoundedButton from "../UI/RoundedButton";
 import { useState } from "react";
 import NavList from "./NavList";

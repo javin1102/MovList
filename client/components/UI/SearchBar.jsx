@@ -1,4 +1,4 @@
-import Search from "../../public/search.svg";
+import Search from "../../public/svg/search.svg";
 import Image from "next/image";
 const SearchBar = ({ isTop, isClickSearch }) => {
   const searchBarBGColor = isTop
