@@ -6,26 +6,18 @@ import Search from "../../public/search.svg";
 
 import RoundedButton from "../UI/RoundedButton";
 import { isMobile } from "react-device-detect";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NavList from "./NavList";
 import SearchBar from "../UI/SearchBar";
 import Overlay from "../UI/Overlay";
+import { useTop } from "../../hooks/use-top";
 
 const Nav = () => {
-  const [isTop, setIsTop] = useState(true);
+  const { isTop } = useTop();
   const [isOpenHamburger, setIsOpenHamburger] = useState(false);
   const [isClickSearch, setIsClickSearch] = useState(false);
 
   const navBGColor = isTop ? "bg-[rgba(0,0,0,0.85)]" : "bg-white";
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 0) {
-        setIsTop(false);
-        return;
-      }
-      setIsTop(true);
-    });
-  }, [isTop]);
 
   return (
     <>
