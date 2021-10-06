@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Kimi from "../../public/Kimi.jpg";
+import Kimi from "../../../public/Kimi.jpg";
 const SliderCard = () => {
   return (
     <div className="w-full px-1 lg:px-3 flex flex-col items-center">

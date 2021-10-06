@@ -1,9 +1,9 @@
 // import ScrollContainer from "react-indiana-drag-scroll";
 import SliderCard from "./SliderCard";
 import Slider from "react-slick";
-import LeftArrow from "./LeftThinArrow";
-import RightArrow from "./RightThinArrow";
-const ContentSlider = () => {
+import LeftArrow from "../../UI/LeftThinArrow";
+import RightArrow from "../../UI/RightThinArrow";
+const SliderTrack = () => {
   const settings = {
     slidesToShow: 7,
     slidesToScroll: 7,
@@ -56,4 +56,4 @@ const ContentSlider = () => {
   );
 };
 
-export default ContentSlider;
+export default SliderTrack;
