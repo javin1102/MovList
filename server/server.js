@@ -4,6 +4,9 @@ const { graphqlHTTP } = require("express-graphql");
 const axios = require("axios");
 const schema = require("./schema");
 const app = express();
+const cors = require("cors");
+
+app.use(cors());
 
 app.use(
   "/graphql",
