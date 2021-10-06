@@ -3,7 +3,7 @@ import SliderCard from "./SliderCard";
 import Slider from "react-slick";
 import LeftArrow from "../../UI/LeftThinArrow";
 import RightArrow from "../../UI/RightThinArrow";
-const SliderTrack = () => {
+const SliderTrack = ({ movies }) => {
   const settings = {
     slidesToShow: 7,
     slidesToScroll: 7,
@@ -48,11 +48,19 @@ const SliderTrack = () => {
   };
   const imgData = [0, 0, 0, 0, 0, 0, 0, 0];
   return (
-    <Slider {...settings}>
-      {imgData.map((data, index) => (
-        <SliderCard key={index} />
-      ))}
-    </Slider>
+    <>
+      {movies.length > 0 && (
+        <Slider {...settings}>
+          {movies.map((movie, index) => (
+            <SliderCard
+              key={index}
+              movieTitle={movie.title}
+              poster={movie.poster_path}
+            />
+          ))}
+        </Slider>
+      )}
+    </>
   );
 };
 
