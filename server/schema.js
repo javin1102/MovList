@@ -8,8 +8,10 @@ const {
   GraphQLSchema,
   GraphQLFloat,
 } = require("graphql");
+
 const YOUR_API = process.env.API_KEY;
-const genres = [];
+
+let genres = [];
 const genresRequest = async () => {
   return await axios
     .get(
@@ -17,10 +19,11 @@ const genresRequest = async () => {
     )
     .then((res) => {
       const genreData = res.data.genres;
-      genreData.map((genre) => genres.push(genre));
+      genres = [...genreData];
     });
 };
 genresRequest();
+
 const NewMoviesType = new GraphQLObjectType({
   name: "NewMovies",
   fields: {

@@ -3,52 +3,44 @@ import SliderCard from "./SliderCard";
 import Slider from "react-slick";
 import LeftArrow from "../../UI/LeftThinArrow";
 import RightArrow from "../../UI/RightThinArrow";
+import { useGetWidth } from "../../../hooks/use-get-width";
+import { useEffect, useState } from "react";
 const SliderTrack = ({ movies }) => {
+  const { width } = useGetWidth();
+  const [slidesShowNum, setSlideShowNum] = useState(1);
+
+  useEffect(() => {
+    if (width <= 640) {
+      setSlideShowNum(3);
+      return;
+    }
+    if (width <= 1280) {
+      setSlideShowNum(4);
+      return;
+    }
+    if (width <= 1440) {
+      setSlideShowNum(5);
+      return;
+    }
+    if (width <= 1880) {
+      setSlideShowNum(6);
+      return;
+    }
+  }, [width, slidesShowNum]);
+
   const settings = {
-    slidesToShow: 7,
-    slidesToScroll: 7,
+    slidesToShow: slidesShowNum,
+    slidesToScroll: slidesShowNum,
     arrows: true,
     infinite: false,
     speed: 500,
     prevArrow: <LeftArrow />,
     nextArrow: <RightArrow />,
-    responsive: [
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-
-      {
-        breakpoint: 1280,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-        },
-      },
-
-      {
-        breakpoint: 1440,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 5,
-        },
-      },
-
-      {
-        breakpoint: 1880,
-        settings: {
-          slidesToShow: 6,
-          slidesToScroll: 6,
-        },
-      },
-    ],
   };
   const imgData = [0, 0, 0, 0, 0, 0, 0, 0];
   return (
     <>
+      {console.log(slidesShowNum)}
       {movies.length > 0 && (
         <Slider {...settings}>
           {movies.map((movie, index) => (
