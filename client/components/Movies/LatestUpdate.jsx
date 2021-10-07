@@ -3,14 +3,17 @@ import SliderHeading from "./MovieSlider/SliderHeading";
 import SliderLayout from "./MovieSlider/SliderLayout";
 import SliderHeader from "./MovieSlider/SliderHeader";
 import SliderPageNum from "./MovieSlider/SliderPageNum";
+import { usePageNum } from "../../hooks/use-page-num";
 const LatestUpdate = ({ newMovies }) => {
+  const { slidesShowNum, totalPageNum } = usePageNum(newMovies.length);
   return (
     <SliderLayout>
       <SliderHeader>
         <SliderHeading>Latest Update</SliderHeading>
-        <SliderPageNum>3/5</SliderPageNum>
+        <SliderPageNum>3/{totalPageNum}</SliderPageNum>
       </SliderHeader>
-      <CardSlider movies={newMovies} />
+
+      <CardSlider movies={newMovies} slidesShowNum={slidesShowNum} />
     </SliderLayout>
   );
 };
