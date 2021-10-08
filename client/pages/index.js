@@ -1,4 +1,3 @@
-import LatestUpdate from "../components/Movies/MovieListSlider";
 import Header from "../components/Header/Header";
 import Nav from "../components/Nav/Nav";
 
@@ -8,7 +7,7 @@ import {
   ApolloProvider,
   gql,
 } from "@apollo/client";
-import Popular from "../components/Movies/Popular";
+
 import MoviesListSlider from "../components/Movies/MovieListSlider";
 
 const client = new ApolloClient({
