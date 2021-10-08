@@ -1,4 +1,4 @@
-import LatestUpdate from "../components/Movies/LatestUpdate";
+import LatestUpdate from "../components/Movies/MovieListSlider";
 import Header from "../components/Header/Header";
 import Nav from "../components/Nav/Nav";
 
@@ -9,6 +9,7 @@ import {
   gql,
 } from "@apollo/client";
 import Popular from "../components/Movies/Popular";
+import MoviesListSlider from "../components/Movies/MovieListSlider";
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql",
@@ -20,8 +21,8 @@ export default function Home({ newMovies, popularMovies }) {
     <ApolloProvider client={client}>
       <Nav />
       <Header />
-      <LatestUpdate newMovies={newMovies} />
-      <Popular popularMovies={popularMovies} />
+      <MoviesListSlider headline="Latest Update" movies={newMovies} />
+      <MoviesListSlider headline="Popular" movies={popularMovies} />
       <div className="min-h-[1000px]"></div>
     </ApolloProvider>
   );

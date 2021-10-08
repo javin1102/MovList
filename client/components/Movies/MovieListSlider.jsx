@@ -6,8 +6,8 @@ import SliderPageNum from "./MovieSlider/SliderPageNum";
 import { usePageNum } from "../../hooks/use-page-num";
 import { useEffect, useState } from "react";
 
-const LatestUpdate = ({ newMovies }) => {
-  const { slidesShowNum, totalPageNum } = usePageNum(newMovies.length);
+const MoviesListSlider = ({ movies, headline }) => {
+  const { slidesShowNum, totalPageNum } = usePageNum(movies.length);
   const [currentSlidePage, setCurrentSlidePage] = useState(1);
   const [canChangePage, setCanChangePage] = useState(true);
 
@@ -29,14 +29,14 @@ const LatestUpdate = ({ newMovies }) => {
   return (
     <SliderLayout>
       <SliderHeader>
-        <SliderHeading>Latest Update</SliderHeading>
+        <SliderHeading>{headline}</SliderHeading>
         <SliderPageNum>
           {currentSlidePage}/{totalPageNum}
         </SliderPageNum>
       </SliderHeader>
 
       <SliderTrack
-        movies={newMovies}
+        movies={movies}
         slidesShowNum={slidesShowNum}
         setCurrentSlidePage={setCurrentSlidePage}
         setCanChangePage={setCanChangePage}
@@ -48,4 +48,4 @@ const LatestUpdate = ({ newMovies }) => {
   );
 };
 
-export default LatestUpdate;
+export default MoviesListSlider;
