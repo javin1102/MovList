@@ -20,7 +20,7 @@ const SliderTrack = ({
     slidesToScroll: slidesShowNum,
     arrows: true,
     infinite: false,
-    speed: 400,
+    speed: 380,
     prevArrow: (
       <LeftArrow
         sliderRef={sliderRef}
