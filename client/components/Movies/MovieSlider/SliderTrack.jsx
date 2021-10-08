@@ -8,11 +8,11 @@ import { useRef } from "react";
 const SliderTrack = ({
   movies,
   slidesShowNum,
-  setCurrentPageNum,
+  setCurrentSlidePage,
   setCanChangePage,
   canChangePage,
   totalPageNum,
-  currentPageNum,
+  currentSlidePage,
 }) => {
   const sliderRef = useRef();
   const settings = {
@@ -24,20 +24,20 @@ const SliderTrack = ({
     prevArrow: (
       <LeftArrow
         sliderRef={sliderRef}
-        setCurrentPageNum={setCurrentPageNum}
+        setCurrentSlidePage={setCurrentSlidePage}
         setCanChangePage={setCanChangePage}
         canChangePage={canChangePage}
-        currentPageNum={currentPageNum}
+        currentSlidePage={currentSlidePage}
       />
     ),
     nextArrow: (
       <RightArrow
         sliderRef={sliderRef}
-        setCurrentPageNum={setCurrentPageNum}
+        setCurrentSlidePage={setCurrentSlidePage}
         setCanChangePage={setCanChangePage}
         canChangePage={canChangePage}
         totalPageNum={totalPageNum}
-        currentPageNum={currentPageNum}
+        currentSlidePage={currentSlidePage}
       />
     ),
   };

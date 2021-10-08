@@ -1,10 +1,10 @@
 const LeftThinArrow = (props) => {
   const {
     sliderRef,
-    setCurrentPageNum,
+    setCurrentSlidePage,
     setCanChangePage,
     canChangePage,
-    currentPageNum,
+    currentSlidePage,
   } = props;
 
   return (
@@ -16,9 +16,10 @@ const LeftThinArrow = (props) => {
       xmlns="http://www.w3.org/2000/svg"
       className="absolute top-1/2 z-[1] cursor-pointer -left-10 scale-50 -translate-y-3/4 md:scale-75 lg:scale-100 lg:-left-20"
       onClick={() => {
-        if (canChangePage && currentPageNum > 1) {
+        if (canChangePage && currentSlidePage > 1) {
           sliderRef?.current?.slickPrev();
-          setCurrentPageNum((prev) => (prev -= 1));
+          setCurrentSlidePage((prev) => (prev -= 1));
+
           //slider is animating, set can change page to false
           setCanChangePage(false);
         }

@@ -5,9 +5,10 @@ import SliderHeader from "./MovieSlider/SliderHeader";
 import SliderPageNum from "./MovieSlider/SliderPageNum";
 import { usePageNum } from "../../hooks/use-page-num";
 import { useEffect, useState } from "react";
+
 const LatestUpdate = ({ newMovies }) => {
   const { slidesShowNum, totalPageNum } = usePageNum(newMovies.length);
-  const [currentPageNum, setCurrentPageNum] = useState(1);
+  const [currentSlidePage, setCurrentSlidePage] = useState(1);
   const [canChangePage, setCanChangePage] = useState(true);
 
   const changePageHandler = () => {
@@ -30,18 +31,18 @@ const LatestUpdate = ({ newMovies }) => {
       <SliderHeader>
         <SliderHeading>Latest Update</SliderHeading>
         <SliderPageNum>
-          {currentPageNum}/{totalPageNum}
+          {currentSlidePage}/{totalPageNum}
         </SliderPageNum>
       </SliderHeader>
 
       <SliderTrack
         movies={newMovies}
         slidesShowNum={slidesShowNum}
-        setCurrentPageNum={setCurrentPageNum}
+        setCurrentSlidePage={setCurrentSlidePage}
         setCanChangePage={setCanChangePage}
         canChangePage={canChangePage}
         totalPageNum={totalPageNum}
-        currentPageNum={currentPageNum}
+        currentSlidePage={currentSlidePage}
       />
     </SliderLayout>
   );
