@@ -24,7 +24,7 @@ const genresRequest = async () => {
 };
 genresRequest();
 
-const NewMoviesType = new GraphQLObjectType({
+const MoviesType = new GraphQLObjectType({
   name: "NewMovies",
   fields: {
     id: { type: GraphQLInt },
@@ -42,7 +42,7 @@ const RootQueryType = new GraphQLObjectType({
   name: "RootQuery",
   fields: {
     newMovies: {
-      type: new GraphQLList(NewMoviesType),
+      type: new GraphQLList(MoviesType),
       args: {
         page: { type: GraphQLInt },
       },
@@ -50,6 +50,33 @@ const RootQueryType = new GraphQLObjectType({
         return axios
           .get(
             `https://api.themoviedb.org/3/movie/now_playing?api_key=${YOUR_API}&language=en-US&page=${args.page}`
+          )
+          .then((res) => {
+            const movies = res.data.results;
+            movies.map((movie) => {
+              movie.poster_path =
+                "https://image.tmdb.org/t/p/w500" + movie.poster_path;
+              movie.backdrop_path =
+                "https://image.tmdb.org/t/p/w500" + movie.backdrop_path;
+              movie.genre_name = movie.genre_ids.map(
+                (id) => genres.find((genre) => genre.id === id).name
+              );
+            });
+
+            return movies;
+          });
+      },
+    },
+
+    popularMovies: {
+      type: new GraphQLList(MoviesType),
+      args: {
+        page: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        return axios
+          .get(
+            `https://api.themoviedb.org/3/movie/popular?api_key=${YOUR_API}&language=en-US&page=${args.page}`
           )
           .then((res) => {
             const movies = res.data.results;
