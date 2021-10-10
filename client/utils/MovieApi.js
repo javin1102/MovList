@@ -70,4 +70,20 @@ export default class MovieAPI {
     });
     return movies.data.top_rated;
   }
+
+  static async getCarouselMovies() {
+    const movies = await client.query({
+      query: gql`
+        query {
+          carousel {
+            id
+            title
+            vote_average
+            backdrop_path
+          }
+        }
+      `,
+    });
+    return movies.data.carousel;
+  }
 }

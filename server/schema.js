@@ -169,7 +169,7 @@ const RootQueryType = new GraphQLObjectType({
       },
     },
 
-    slider: {
+    carousel: {
       type: new GraphQLList(MoviesType),
       resolve() {
         return axios

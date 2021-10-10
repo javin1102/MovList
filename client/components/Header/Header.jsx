@@ -6,7 +6,7 @@ import Kimi from "../../public/Kimi.jpg";
 import LeftArrow from "../UI/LeftFatArrow";
 import RightArrow from "../UI/RightFatArrow";
 import HeaderMovieTitle from "./HeaderMovieTitle";
-const Header = () => {
+const Header = ({ movies }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -20,20 +20,24 @@ const Header = () => {
     prevArrow: <LeftArrow />,
     nextArrow: <RightArrow />,
   };
+
   const imgData = [Giyu, Joker, Kimi];
+  const movData = movies.slice(0, 7);
   return (
     <header className="w-full h-[fit-content]">
-      <Slider {...settings}>
-        {imgData.map((img, index) => (
-          <div
-            className="w-full h-[300px] sm:h-[450px] lg:h-[600px] relative"
-            key={index}
-          >
-            <HeaderMovieTitle />
-            <Image src={img.src} layout="fill" objectFit="cover" />
-          </div>
-        ))}
-      </Slider>
+      {movData.length > 0 && (
+        <Slider {...settings}>
+          {movData.map((mov, index) => (
+            <div
+              className="w-full h-[300px] sm:h-[450px] lg:h-[700px] relative"
+              key={index}
+            >
+              <HeaderMovieTitle />
+              <Image src={mov.backdrop_path} layout="fill" objectFit="cover" />
+            </div>
+          ))}
+        </Slider>
+      )}
     </header>
   );
 };

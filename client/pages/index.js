@@ -10,11 +10,12 @@ export default function Home({
   trending,
   recommendation,
   top_rated,
+  carousel,
 }) {
   return (
     <ApolloProvider client={client}>
       <Nav />
-      <Header />
+      <Header movies={carousel} />
       <MoviesListSlider headline="Top Rated" movies={top_rated} />
       <MoviesListSlider headline="Recommendation" movies={recommendation} />
       <MoviesListSlider headline="Popular" movies={popular} />
@@ -41,6 +42,8 @@ export async function getStaticProps() {
   const top_rated1 = await MovieAPI.getTopRatedMovies(1);
   const top_rated2 = await MovieAPI.getTopRatedMovies(2);
 
+  const carousel = await MovieAPI.getCarouselMovies();
+
   const upcoming = [...upcoming1, ...upcoming2];
   const popular = [...popular1, ...popular2];
   const trending = [...trending1, ...trending2];
@@ -54,6 +57,7 @@ export async function getStaticProps() {
       trending,
       recommendation,
       top_rated,
+      carousel,
     },
     revalidate: 10,
   };
