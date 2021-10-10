@@ -1,74 +1,59 @@
 import Header from "../components/Header/Header";
 import Nav from "../components/Nav/Nav";
-
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  gql,
-} from "@apollo/client";
-
 import MoviesListSlider from "../components/Movies/MovieListSlider";
-
-const client = new ApolloClient({
-  uri: "http://localhost:5000/graphql",
-  cache: new InMemoryCache(),
-});
-
-export default function Home({ newMovies, popularMovies }) {
+import { client } from "../utils/ApolloClient";
+import { ApolloProvider } from "@apollo/client";
+import MovieAPI from "../utils/MovieApi";
+export default function Home({
+  upcoming,
+  popular,
+  trending,
+  recommendation,
+  top_rated,
+}) {
   return (
     <ApolloProvider client={client}>
       <Nav />
       <Header />
-      <MoviesListSlider headline="Latest Update" movies={newMovies} />
-      <MoviesListSlider headline="Popular" movies={popularMovies} />
+      <MoviesListSlider headline="Top Rated" movies={top_rated} />
+      <MoviesListSlider headline="Recommendation" movies={recommendation} />
+      <MoviesListSlider headline="Popular" movies={popular} />
+      <MoviesListSlider headline="Trending" movies={trending} />
+      <MoviesListSlider headline="Upcoming" movies={upcoming} />
       <div className="min-h-[1000px]"></div>
     </ApolloProvider>
   );
 }
 
-const newMoviesGraphQL = async (page) => {
-  const movies = await client.query({
-    query: gql`
-      query {
-        newMovies(page: ${page}) {
-          title
-          poster_path
-        }
-      }
-    `,
-  });
-  return movies.data.newMovies;
-};
-
-const popularMoviesGraphQL = async (page) => {
-  const movies = await client.query({
-    query: gql`
-      query {
-        popularMovies(page: ${page}) {
-          title
-          poster_path
-        }
-      }
-    `,
-  });
-  return movies.data.popularMovies;
-};
-
 export async function getStaticProps() {
-  const newMovies1 = await newMoviesGraphQL(1);
-  const newMovies2 = await newMoviesGraphQL(2);
+  const upcoming1 = await MovieAPI.getUpcomingMovies(1);
+  const upcoming2 = await MovieAPI.getUpcomingMovies(2);
 
-  const popularMovies1 = await popularMoviesGraphQL(2);
-  const popularMovies2 = await popularMoviesGraphQL(3);
+  const popular1 = await MovieAPI.getPopularMovies(2);
+  const popular2 = await MovieAPI.getPopularMovies(3);
 
-  const newMovies = [...newMovies1, ...newMovies2];
-  const popularMovies = [...popularMovies1, ...popularMovies2];
+  const trending1 = await MovieAPI.getTrendingMovies(1);
+  const trending2 = await MovieAPI.getTrendingMovies(2);
+
+  const recommendation1 = await MovieAPI.getRecommendationMovies(1);
+  const recommendation2 = await MovieAPI.getRecommendationMovies(2);
+
+  const top_rated1 = await MovieAPI.getTopRatedMovies(1);
+  const top_rated2 = await MovieAPI.getTopRatedMovies(2);
+
+  const upcoming = [...upcoming1, ...upcoming2];
+  const popular = [...popular1, ...popular2];
+  const trending = [...trending1, ...trending2];
+  const recommendation = [...recommendation1, ...recommendation2];
+  const top_rated = [...top_rated1, ...top_rated2];
 
   return {
     props: {
-      newMovies,
-      popularMovies,
+      upcoming,
+      popular,
+      trending,
+      recommendation,
+      top_rated,
     },
     revalidate: 10,
   };
