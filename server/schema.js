@@ -52,7 +52,7 @@ const RootQueryType = new GraphQLObjectType({
       resolve(parent, args) {
         return axios
           .get(
-            `https://api.themoviedb.org/3/movie/recommendations?api_key=${YOUR_API}&language=en-US&page=${args.page}`
+            `https://api.themoviedb.org/3/movie/3/recommendations?api_key=${YOUR_API}&language=en-US&page=${args.page}`
           )
           .then((res) => {
             const movies = res.data.results;
