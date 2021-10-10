@@ -22,6 +22,7 @@ const genresRequest = async () => {
       genres = [...genreData];
     });
 };
+
 genresRequest();
 
 const MoviesType = new GraphQLObjectType({
@@ -29,6 +30,8 @@ const MoviesType = new GraphQLObjectType({
   fields: {
     id: { type: GraphQLInt },
     title: { type: GraphQLString },
+    overview: { type: GraphQLString },
+    release_date: { type: GraphQLString },
     poster_path: { type: GraphQLString },
     popularity: { type: GraphQLFloat },
     vote_average: { type: GraphQLFloat },
@@ -41,6 +44,32 @@ const MoviesType = new GraphQLObjectType({
 const RootQueryType = new GraphQLObjectType({
   name: "RootQuery",
   fields: {
+    recommendation: {
+      type: new GraphQLList(MoviesType),
+      args: {
+        page: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        return axios
+          .get(
+            `https://api.themoviedb.org/3/movie/recommendations?api_key=${YOUR_API}&language=en-US&page=${args.page}`
+          )
+          .then((res) => {
+            const movies = res.data.results;
+            movies.map((movie) => {
+              movie.poster_path =
+                "https://image.tmdb.org/t/p/w500" + movie.poster_path;
+              movie.backdrop_path =
+                "https://image.tmdb.org/t/p/w500" + movie.backdrop_path;
+              movie.genre_name = movie.genre_ids.map(
+                (id) => genres.find((genre) => genre.id === id).name
+              );
+            });
+
+            return movies;
+          });
+      },
+    },
     newMovies: {
       type: new GraphQLList(MoviesType),
       args: {
@@ -49,7 +78,34 @@ const RootQueryType = new GraphQLObjectType({
       resolve(parent, args) {
         return axios
           .get(
-            `https://api.themoviedb.org/3/movie/now_playing?api_key=${YOUR_API}&language=en-US&page=${args.page}`
+            `https://api.themoviedb.org/3/movie/latest?api_key=${YOUR_API}&language=en-US&page=${args.page}`
+          )
+          .then((res) => {
+            const movies = res.data.results;
+            movies.map((movie) => {
+              movie.poster_path =
+                "https://image.tmdb.org/t/p/w500" + movie.poster_path;
+              movie.backdrop_path =
+                "https://image.tmdb.org/t/p/w500" + movie.backdrop_path;
+              movie.genre_name = movie.genre_ids.map(
+                (id) => genres.find((genre) => genre.id === id).name
+              );
+            });
+
+            return movies;
+          });
+      },
+    },
+
+    trending: {
+      type: new GraphQLList(MoviesType),
+      args: {
+        page: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        return axios
+          .get(
+            `https://api.themoviedb.org/3/trending/movie/week?api_key=${YOUR_API}&language=en-US&page=${args.page}`
           )
           .then((res) => {
             const movies = res.data.results;
@@ -77,6 +133,33 @@ const RootQueryType = new GraphQLObjectType({
         return axios
           .get(
             `https://api.themoviedb.org/3/movie/popular?api_key=${YOUR_API}&language=en-US&page=${args.page}`
+          )
+          .then((res) => {
+            const movies = res.data.results;
+            movies.map((movie) => {
+              movie.poster_path =
+                "https://image.tmdb.org/t/p/w500" + movie.poster_path;
+              movie.backdrop_path =
+                "https://image.tmdb.org/t/p/w500" + movie.backdrop_path;
+              movie.genre_name = movie.genre_ids.map(
+                (id) => genres.find((genre) => genre.id === id).name
+              );
+            });
+
+            return movies;
+          });
+      },
+    },
+
+    top_rated: {
+      type: new GraphQLList(MoviesType),
+      args: {
+        page: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        return axios
+          .get(
+            `https://api.themoviedb.org/3/movie/top_rated?api_key=${YOUR_API}&language=en-US&page=${args.page}`
           )
           .then((res) => {
             const movies = res.data.results;
