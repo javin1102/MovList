@@ -32,7 +32,10 @@ const Header = ({ movies }) => {
               className="w-full h-[300px] sm:h-[450px] lg:h-[700px] relative"
               key={index}
             >
-              <HeaderMovieTitle />
+              <HeaderMovieTitle
+                title={mov.title}
+                vote_average={mov.vote_average}
+              />
               <Image src={mov.backdrop_path} layout="fill" objectFit="cover" />
             </div>
           ))}
