@@ -24,7 +24,8 @@ const genresRequest = async () => {
 };
 
 genresRequest();
-
+const backdropImageURL = "https://image.tmdb.org/t/p/original";
+const posterImageURL = "https://image.tmdb.org/t/p/w500";
 const MoviesType = new GraphQLObjectType({
   name: "NewMovies",
   fields: {
@@ -57,10 +58,8 @@ const RootQueryType = new GraphQLObjectType({
           .then((res) => {
             const movies = res.data.results;
             movies.map((movie) => {
-              movie.poster_path =
-                "https://image.tmdb.org/t/p/w500" + movie.poster_path;
-              movie.backdrop_path =
-                "https://image.tmdb.org/t/p/w500" + movie.backdrop_path;
+              movie.poster_path = posterImageURL + movie.poster_path;
+              movie.backdrop_path = backdropImageURL + movie.backdrop_path;
               movie.genre_name = movie.genre_ids.map(
                 (id) => genres.find((genre) => genre.id === id).name
               );
@@ -83,10 +82,8 @@ const RootQueryType = new GraphQLObjectType({
           .then((res) => {
             const movies = res.data.results;
             movies.map((movie) => {
-              movie.poster_path =
-                "https://image.tmdb.org/t/p/w500" + movie.poster_path;
-              movie.backdrop_path =
-                "https://image.tmdb.org/t/p/w500" + movie.backdrop_path;
+              movie.poster_path = posterImageURL + movie.poster_path;
+              movie.backdrop_path = backdropImageURL + movie.backdrop_path;
               movie.genre_name = movie.genre_ids.map(
                 (id) => genres.find((genre) => genre.id === id).name
               );
@@ -110,10 +107,8 @@ const RootQueryType = new GraphQLObjectType({
           .then((res) => {
             const movies = res.data.results;
             movies.map((movie) => {
-              movie.poster_path =
-                "https://image.tmdb.org/t/p/w500" + movie.poster_path;
-              movie.backdrop_path =
-                "https://image.tmdb.org/t/p/w500" + movie.backdrop_path;
+              movie.poster_path = posterImageURL + movie.poster_path;
+              movie.backdrop_path = backdropImageURL + movie.backdrop_path;
               movie.genre_name = movie.genre_ids.map(
                 (id) => genres.find((genre) => genre.id === id).name
               );
@@ -137,10 +132,8 @@ const RootQueryType = new GraphQLObjectType({
           .then((res) => {
             const movies = res.data.results;
             movies.map((movie) => {
-              movie.poster_path =
-                "https://image.tmdb.org/t/p/w500" + movie.poster_path;
-              movie.backdrop_path =
-                "https://image.tmdb.org/t/p/w500" + movie.backdrop_path;
+              movie.poster_path = posterImageURL + movie.poster_path;
+              movie.backdrop_path = backdropImageURL + movie.backdrop_path;
               movie.genre_name = movie.genre_ids.map(
                 (id) => genres.find((genre) => genre.id === id).name
               );
@@ -164,10 +157,8 @@ const RootQueryType = new GraphQLObjectType({
           .then((res) => {
             const movies = res.data.results;
             movies.map((movie) => {
-              movie.poster_path =
-                "https://image.tmdb.org/t/p/w500" + movie.poster_path;
-              movie.backdrop_path =
-                "https://image.tmdb.org/t/p/w500" + movie.backdrop_path;
+              movie.poster_path = posterImageURL + movie.poster_path;
+              movie.backdrop_path = backdropImageURL + movie.backdrop_path;
               movie.genre_name = movie.genre_ids.map(
                 (id) => genres.find((genre) => genre.id === id).name
               );
@@ -186,12 +177,10 @@ const RootQueryType = new GraphQLObjectType({
             `https://api.themoviedb.org/3/list/3?api_key=${YOUR_API}&language=en-US`
           )
           .then((res) => {
-            const movies = res.data.results;
+            const movies = res.data.items;
             movies.map((movie) => {
-              movie.poster_path =
-                "https://image.tmdb.org/t/p/w500" + movie.poster_path;
-              movie.backdrop_path =
-                "https://image.tmdb.org/t/p/w500" + movie.backdrop_path;
+              movie.poster_path = posterImageURL + movie.poster_path;
+              movie.backdrop_path = backdropImageURL + movie.backdrop_path;
               movie.genre_name = movie.genre_ids.map(
                 (id) => genres.find((genre) => genre.id === id).name
               );
