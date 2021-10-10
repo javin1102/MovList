@@ -2,8 +2,8 @@ import Search from "../../public/svg/search.svg";
 import Image from "next/image";
 const SearchBar = ({ isTop, isClickSearch }) => {
   const searchBarBGColor = isTop
-    ? "bg-[#ffffff]"
-    : "bg-[rgba(193,193,193,0.5)]";
+    ? "bg-[rgba(255,255,255,0.4)] text-white placeholder-[rgba(255,255,255,0.8)]"
+    : "bg-[rgba(193,193,193,0.5)] text-black ";
 
   const mobileSearchBarController = isClickSearch
     ? "-translate-y-0 opacity-100"
@@ -14,7 +14,7 @@ const SearchBar = ({ isTop, isClickSearch }) => {
     >
       <input
         placeholder="Search anything..."
-        className={`rounded-full w-full ${searchBarBGColor} h-10 pl-5 pr-16 outline-none font-poppins`}
+        className={`rounded-full w-full ${searchBarBGColor} h-10 pl-5 pr-16 outline-none font-poppins `}
       />
       <div className="w-6 h-6 absolute cursor-pointer right-5 top-1/2 -translate-y-1/2 ">
         <Image src={Search} layout="responsive" />

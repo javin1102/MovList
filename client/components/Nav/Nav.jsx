@@ -15,7 +15,7 @@ const Nav = () => {
   const [isOpenHamburger, setIsOpenHamburger] = useState(false);
   const [isClickSearch, setIsClickSearch] = useState(false);
 
-  const navBGColor = isTop ? "bg-[rgba(24,24,24,0.8)]" : "bg-white";
+  const navBGColor = isTop ? "bg-[rgba(24,24,24,0.7)]" : "bg-white";
 
   return (
     <>
