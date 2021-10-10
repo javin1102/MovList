@@ -1,8 +1,5 @@
 import Slider from "react-slick";
 import Image from "next/image";
-import Giyu from "../../public/Giyu.jpg";
-import Joker from "../../public/Joker.jpg";
-import Kimi from "../../public/Kimi.jpg";
 import LeftArrow from "../UI/LeftFatArrow";
 import RightArrow from "../UI/RightFatArrow";
 import HeaderMovieTitle from "./HeaderMovieTitle";
@@ -21,7 +18,6 @@ const Header = ({ movies }) => {
     nextArrow: <RightArrow />,
   };
 
-  const imgData = [Giyu, Joker, Kimi];
   const movData = movies.slice(0, 7);
   return (
     <header className="w-full h-[fit-content]">
@@ -32,7 +28,10 @@ const Header = ({ movies }) => {
               className="w-full h-[300px] sm:h-[450px] lg:h-[700px] relative"
               key={index}
             >
-              <HeaderMovieTitle />
+              <HeaderMovieTitle
+                title={mov.title}
+                vote_average={mov.vote_average}
+              />
               <Image src={mov.backdrop_path} layout="fill" objectFit="cover" />
             </div>
           ))}
