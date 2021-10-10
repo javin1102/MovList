@@ -70,7 +70,7 @@ const RootQueryType = new GraphQLObjectType({
           });
       },
     },
-    newMovies: {
+    upcoming: {
       type: new GraphQLList(MoviesType),
       args: {
         page: { type: GraphQLInt },
@@ -78,7 +78,7 @@ const RootQueryType = new GraphQLObjectType({
       resolve(parent, args) {
         return axios
           .get(
-            `https://api.themoviedb.org/3/movie/latest?api_key=${YOUR_API}&language=en-US&page=${args.page}`
+            `https://api.themoviedb.org/3/movie/upcoming?api_key=${YOUR_API}&language=en-US`
           )
           .then((res) => {
             const movies = res.data.results;
@@ -124,7 +124,7 @@ const RootQueryType = new GraphQLObjectType({
       },
     },
 
-    popularMovies: {
+    popular: {
       type: new GraphQLList(MoviesType),
       args: {
         page: { type: GraphQLInt },
@@ -160,6 +160,30 @@ const RootQueryType = new GraphQLObjectType({
         return axios
           .get(
             `https://api.themoviedb.org/3/movie/top_rated?api_key=${YOUR_API}&language=en-US&page=${args.page}`
+          )
+          .then((res) => {
+            const movies = res.data.results;
+            movies.map((movie) => {
+              movie.poster_path =
+                "https://image.tmdb.org/t/p/w500" + movie.poster_path;
+              movie.backdrop_path =
+                "https://image.tmdb.org/t/p/w500" + movie.backdrop_path;
+              movie.genre_name = movie.genre_ids.map(
+                (id) => genres.find((genre) => genre.id === id).name
+              );
+            });
+
+            return movies;
+          });
+      },
+    },
+
+    slider: {
+      type: new GraphQLList(MoviesType),
+      resolve() {
+        return axios
+          .get(
+            `https://api.themoviedb.org/3/list/3?api_key=${YOUR_API}&language=en-US`
           )
           .then((res) => {
             const movies = res.data.results;
