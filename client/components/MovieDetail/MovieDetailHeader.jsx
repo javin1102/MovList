@@ -1,5 +1,5 @@
-import MovieDescription from "./MovieDescription";
-import MovieDetailPoster from "./MovieDetailPoster";
+import MovieDescription from "./MovieDetailHeader/MovieDescription";
+import MovieDetailPoster from "./MovieDetailHeader/MoviePoster";
 
 const MovieHeader = () => {
   return (

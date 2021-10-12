@@ -1,9 +1,10 @@
 import Search from "../../public/svg/search.svg";
 import Image from "next/image";
-const SearchBar = ({ isTop, isClickSearch }) => {
-  const searchBarBGColor = isTop
-    ? "bg-[rgba(255,255,255,0.4)] text-white placeholder-[rgba(255,255,255,0.8)]"
-    : "bg-[rgba(193,193,193,0.5)] text-black ";
+const SearchBar = ({ isTop, isClickSearch, isHomePage }) => {
+  const searchBarBGColor =
+    isTop && isHomePage
+      ? "bg-[rgba(255,255,255,0.4)] text-white placeholder-[rgba(255,255,255,0.8)]"
+      : "bg-[rgba(193,193,193,0.5)] text-black ";
 
   const mobileSearchBarController = isClickSearch
     ? "-translate-y-0 opacity-100"

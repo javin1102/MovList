@@ -1,4 +1,4 @@
-import Star from "../../public/svg/star.svg";
+import Star from "../../../public/svg/star.svg";
 import Image from "next/image";
 const MovieDetailRating = () => {
   return (

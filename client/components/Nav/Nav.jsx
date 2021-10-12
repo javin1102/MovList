@@ -59,7 +59,11 @@ const Nav = ({ isHomePage }) => {
             <Image src={Search} layout="fill" />
           </div>
 
-          <SearchBar isTop={isTop} isClickSearch={isClickSearch} />
+          <SearchBar
+            isTop={isTop}
+            isHomePage={isHomePage}
+            isClickSearch={isClickSearch}
+          />
 
           {/*Google Login Button*/}
           <RoundedButton color="tertiary">
