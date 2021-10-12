@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
-          crossOrigin={true}
+          crossOrigin="true"
         />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
