@@ -9,7 +9,6 @@ import NavList from "./NavList";
 import SearchBar from "../UI/SearchBar";
 import Overlay from "../UI/Overlay";
 import { useTop } from "../../hooks/use-top";
-
 const Nav = ({ isHomePage }) => {
   const { isTop } = useTop();
   const [isOpenHamburger, setIsOpenHamburger] = useState(false);
