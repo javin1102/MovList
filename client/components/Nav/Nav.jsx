@@ -10,12 +10,15 @@ import SearchBar from "../UI/SearchBar";
 import Overlay from "../UI/Overlay";
 import { useTop } from "../../hooks/use-top";
 
-const Nav = () => {
+const Nav = ({ isHomePage }) => {
   const { isTop } = useTop();
   const [isOpenHamburger, setIsOpenHamburger] = useState(false);
   const [isClickSearch, setIsClickSearch] = useState(false);
 
-  const navBGColor = isTop ? "bg-[rgba(24,24,24,0.7)]" : "bg-white";
+  const navBGColor =
+    isTop && isHomePage ? "bg-[rgba(24,24,24,0.7)]" : "bg-white";
+
+  const navBrandColor = isTop && isHomePage ? "text-white" : "text-black";
 
   return (
     <>
@@ -35,16 +38,14 @@ const Nav = () => {
               <Image src={Logo} />
             </div>
             <div
-              className={`text-md sm:text-2xl lg:text-4xl font-poppins ml-3 font-bold ${
-                isTop ? "text-white" : "text-black"
-              }`}
+              className={`text-md sm:text-2xl lg:text-4xl font-poppins ml-3 font-bold ${navBrandColor}`}
             >
               MovList
             </div>
           </div>
         </Link>
 
-        <NavList isTop={isTop} isOpenHamburger={isOpenHamburger} />
+        <NavList isHomePage={isHomePage} isOpenHamburger={isOpenHamburger} />
 
         <div className="flex items-center ml-auto lg:flex-1 ">
           {/*Search Image for mobile*/}
@@ -75,7 +76,7 @@ const Nav = () => {
           className="h-6 w-6 ml-6 sm:h-10 sm:w-10 cursor-pointer lg:hidden"
           fill="white"
           viewBox="0 0 24 24"
-          stroke={`${isTop ? "white" : "black"}`}
+          stroke={`${isTop && isHomePage ? "white" : "black"}`}
           onClick={() => {
             setIsOpenHamburger((prev) => !prev);
             setIsClickSearch(false);

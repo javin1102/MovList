@@ -15,7 +15,7 @@ export default function Home({
 }) {
   return (
     <ApolloProvider client={client}>
-      <Nav />
+      <Nav isHomePage={true} />
       <Header movies={carousel} />
       <MoviesListSlider headline="Top Rated" movies={top_rated} />
       <MoviesListSlider headline="Recommendation" movies={recommendation} />
