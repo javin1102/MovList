@@ -17,9 +17,11 @@ const AddComment = () => {
   const textAreaHeightHandler = (e) => {
     e.target.style.height = "inherit";
     e.target.style.height = `${e.target.scrollHeight}px`;
+  };
+  const textAreaHandler = (e) => {
+    textAreaHeightHandler(e);
     setInputValue(e.target.value);
   };
-
   useEffect(() => {
     if (inputValue !== "") setIsAbleToSubmit(true);
     else setIsAbleToSubmit(false);
@@ -35,7 +37,7 @@ const AddComment = () => {
           className="resize-none border-b-[2px] h-[fit-content] pb-2 border-primary outline-none focus:outline-none w-full ml-5 font-normal"
           onFocus={() => setCanShowButton(true)}
           onBlur={() => setCanShowButton(false)}
-          onChange={textAreaHeightHandler}
+          onChange={textAreaHandler}
           value={inputValue}
         />
         {canShowButton && ButtonBlock}
