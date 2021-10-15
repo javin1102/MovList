@@ -21,6 +21,7 @@ const SliderTrack = ({
     arrows: true,
     infinite: false,
     speed: 380,
+    swipe: false,
     prevArrow: (
       <LeftArrow
         sliderRef={sliderRef}
