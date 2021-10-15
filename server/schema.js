@@ -11,21 +11,17 @@ const {
 
 const YOUR_API = process.env.API_KEY;
 
-let genres = [];
-const genresRequest = async () => {
-  return await axios
-    .get(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${YOUR_API}&language=en-US`
-    )
-    .then((res) => {
-      const genreData = res.data.genres;
-      genres = [...genreData];
-    });
-};
-
-genresRequest();
 const backdropImageURL = "https://image.tmdb.org/t/p/original";
 const posterImageURL = "https://image.tmdb.org/t/p/w500";
+
+const GenreType = new GraphQLObjectType({
+  name: "genre",
+  fields: {
+    id: { type: GraphQLInt },
+    name: { type: GraphQLString },
+  },
+});
+
 const MoviesType = new GraphQLObjectType({
   name: "NewMovies",
   fields: {
@@ -37,14 +33,34 @@ const MoviesType = new GraphQLObjectType({
     popularity: { type: GraphQLFloat },
     vote_average: { type: GraphQLFloat },
     backdrop_path: { type: GraphQLString },
-    genre_ids: { type: new GraphQLList(GraphQLInt) },
-    genre_name: { type: new GraphQLList(GraphQLString) },
+    genres: { type: new GraphQLList(GenreType) },
+    runtime: { type: GraphQLInt },
   },
 });
 
 const RootQueryType = new GraphQLObjectType({
   name: "RootQuery",
   fields: {
+    movie: {
+      type: MoviesType,
+      args: {
+        id: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        return axios
+          .get(
+            `https://api.themoviedb.org/3/movie/${args.id}?api_key=${YOUR_API}&language=en-US`
+          )
+          .then((res) => {
+            const movie = res.data;
+
+            movie.poster_path = posterImageURL + movie.poster_path;
+            movie.backdrop_path = backdropImageURL + movie.backdrop_path;
+
+            return movie;
+          });
+      },
+    },
     recommendation: {
       type: new GraphQLList(MoviesType),
       args: {
@@ -60,9 +76,6 @@ const RootQueryType = new GraphQLObjectType({
             movies.map((movie) => {
               movie.poster_path = posterImageURL + movie.poster_path;
               movie.backdrop_path = backdropImageURL + movie.backdrop_path;
-              movie.genre_name = movie.genre_ids.map(
-                (id) => genres.find((genre) => genre.id === id).name
-              );
             });
 
             return movies;
@@ -84,9 +97,6 @@ const RootQueryType = new GraphQLObjectType({
             movies.map((movie) => {
               movie.poster_path = posterImageURL + movie.poster_path;
               movie.backdrop_path = backdropImageURL + movie.backdrop_path;
-              movie.genre_name = movie.genre_ids.map(
-                (id) => genres.find((genre) => genre.id === id).name
-              );
             });
 
             return movies;
@@ -109,9 +119,6 @@ const RootQueryType = new GraphQLObjectType({
             movies.map((movie) => {
               movie.poster_path = posterImageURL + movie.poster_path;
               movie.backdrop_path = backdropImageURL + movie.backdrop_path;
-              movie.genre_name = movie.genre_ids.map(
-                (id) => genres.find((genre) => genre.id === id).name
-              );
             });
 
             return movies;
@@ -134,9 +141,6 @@ const RootQueryType = new GraphQLObjectType({
             movies.map((movie) => {
               movie.poster_path = posterImageURL + movie.poster_path;
               movie.backdrop_path = backdropImageURL + movie.backdrop_path;
-              movie.genre_name = movie.genre_ids.map(
-                (id) => genres.find((genre) => genre.id === id).name
-              );
             });
 
             return movies;
@@ -159,9 +163,6 @@ const RootQueryType = new GraphQLObjectType({
             movies.map((movie) => {
               movie.poster_path = posterImageURL + movie.poster_path;
               movie.backdrop_path = backdropImageURL + movie.backdrop_path;
-              movie.genre_name = movie.genre_ids.map(
-                (id) => genres.find((genre) => genre.id === id).name
-              );
             });
 
             return movies;
@@ -181,9 +182,6 @@ const RootQueryType = new GraphQLObjectType({
             movies.map((movie) => {
               movie.poster_path = posterImageURL + movie.poster_path;
               movie.backdrop_path = backdropImageURL + movie.backdrop_path;
-              movie.genre_name = movie.genre_ids.map(
-                (id) => genres.find((genre) => genre.id === id).name
-              );
             });
 
             return movies;
