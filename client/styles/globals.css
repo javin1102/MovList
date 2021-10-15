@@ -34,3 +34,19 @@
 /* .slick-slide {
   margin: 0 8px;
 } */
+
+::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  width: 8px;
+  background-color: gray;
+}
+::-webkit-scrollbar-track {
+  border-radius: 1rem;
+  width: 8px;
+}
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: #9c9c9c52;
+  overflow: hidden;
+  border-radius: 1rem;
+}
