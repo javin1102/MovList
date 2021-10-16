@@ -7,6 +7,7 @@ export default class MovieAPI {
       query: gql`
           query {
             upcoming(page: ${page}) {
+              id
               title
               poster_path
             }
@@ -21,6 +22,7 @@ export default class MovieAPI {
       query: gql`
           query {
             popular(page: ${page}) {
+              id
               title
               poster_path
             }
@@ -35,6 +37,7 @@ export default class MovieAPI {
       query: gql`
           query {
             recommendation(page: ${page}) {
+              id
               title
               poster_path
             }
@@ -48,6 +51,7 @@ export default class MovieAPI {
       query: gql`
           query {
             trending(page: ${page}) {
+              id
               title
               poster_path
             }
@@ -62,6 +66,7 @@ export default class MovieAPI {
       query: gql`
           query {
             top_rated(page: ${page}) {
+              id
               title
               poster_path
             }

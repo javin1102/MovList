@@ -52,6 +52,7 @@ const SliderTrack = ({
               key={index}
               movieTitle={movie.title}
               poster={movie.poster_path}
+              id={movie.id}
             />
           ))}
         </Slider>

@@ -6,7 +6,6 @@ import CommenSection from "../../components/Comment/CommentSection";
 import SimilarMovieLayout from "../../components/MovieDetail/SimilarMovie/SimilarMovieLayout";
 import MovieAPI from "../../utils/MovieApi";
 const MovieDetail = ({ movie, similar_movie }) => {
-  console.log(similar_movie);
   return (
     <>
       <Nav />
@@ -32,7 +31,7 @@ export async function getStaticPaths() {
       },
     })),
 
-    fallback: false,
+    fallback: "blocking",
   };
 }
 export async function getStaticProps(ctx) {
