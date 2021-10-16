@@ -1,11 +1,11 @@
 import H2 from "../../UI/H2";
 import SimilarMovieList from "./SimilarMovieList";
 
-const SimilarMovieLayout = () => {
+const SimilarMovieLayout = ({ similar }) => {
   return (
-    <div className="hidden lg:block lg:fixed lg:top-36 lg:right-12">
+    <div className="hidden lg:block lg:fixed lg:top-36 lg:right-12 max-w-md">
       <H2 className="text-primary">Similar</H2>
-      <SimilarMovieList />
+      <SimilarMovieList similar={similar} />
     </div>
   );
 };

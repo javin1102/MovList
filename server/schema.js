@@ -12,8 +12,21 @@ const {
 const YOUR_API = process.env.API_KEY;
 
 const backdropImageURL = "https://image.tmdb.org/t/p/original";
+const smallBackdropImageURL = "https://image.tmdb.org/t/p/w500";
 const posterImageURL = "https://image.tmdb.org/t/p/w500";
 
+let genres = [];
+const genresRequest = async () => {
+  return await axios
+    .get(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${YOUR_API}&language=en-US`
+    )
+    .then((res) => {
+      const genreData = res.data.genres;
+      genres = [...genreData];
+    });
+};
+genresRequest();
 const GenreType = new GraphQLObjectType({
   name: "genre",
   fields: {
@@ -35,6 +48,8 @@ const MoviesType = new GraphQLObjectType({
     vote_average: { type: GraphQLFloat },
     backdrop_path: { type: GraphQLString },
     genres: { type: new GraphQLList(GenreType) },
+    genre_ids: { type: new GraphQLList(GraphQLInt) },
+    genre_name: { type: new GraphQLList(GraphQLString) },
     runtime: { type: GraphQLInt },
     vote_count: { type: GraphQLInt },
   },
@@ -77,7 +92,10 @@ const RootQueryType = new GraphQLObjectType({
             const movies = res.data.results;
             movies.map((movie) => {
               movie.poster_path = posterImageURL + movie.poster_path;
-              movie.backdrop_path = backdropImageURL + movie.backdrop_path;
+              movie.backdrop_path = smallBackdropImageURL + movie.backdrop_path;
+              movie.genre_name = movie.genre_ids.map(
+                (id) => genres.find((genre) => genre.id === id).name
+              );
             });
             return movies;
           });
@@ -98,6 +116,9 @@ const RootQueryType = new GraphQLObjectType({
             movies.map((movie) => {
               movie.poster_path = posterImageURL + movie.poster_path;
               movie.backdrop_path = backdropImageURL + movie.backdrop_path;
+              movie.genre_name = movie.genre_ids.map(
+                (id) => genres.find((genre) => genre.id === id).name
+              );
             });
 
             return movies;
@@ -119,6 +140,9 @@ const RootQueryType = new GraphQLObjectType({
             movies.map((movie) => {
               movie.poster_path = posterImageURL + movie.poster_path;
               movie.backdrop_path = backdropImageURL + movie.backdrop_path;
+              movie.genre_name = movie.genre_ids.map(
+                (id) => genres.find((genre) => genre.id === id).name
+              );
             });
 
             return movies;
@@ -141,6 +165,9 @@ const RootQueryType = new GraphQLObjectType({
             movies.map((movie) => {
               movie.poster_path = posterImageURL + movie.poster_path;
               movie.backdrop_path = backdropImageURL + movie.backdrop_path;
+              movie.genre_name = movie.genre_ids.map(
+                (id) => genres.find((genre) => genre.id === id).name
+              );
             });
 
             return movies;
@@ -163,6 +190,9 @@ const RootQueryType = new GraphQLObjectType({
             movies.map((movie) => {
               movie.poster_path = posterImageURL + movie.poster_path;
               movie.backdrop_path = backdropImageURL + movie.backdrop_path;
+              movie.genre_name = movie.genre_ids.map(
+                (id) => genres.find((genre) => genre.id === id).name
+              );
             });
 
             return movies;
@@ -185,6 +215,9 @@ const RootQueryType = new GraphQLObjectType({
             movies.map((movie) => {
               movie.poster_path = posterImageURL + movie.poster_path;
               movie.backdrop_path = backdropImageURL + movie.backdrop_path;
+              movie.genre_name = movie.genre_ids.map(
+                (id) => genres.find((genre) => genre.id === id).name
+              );
             });
 
             return movies;

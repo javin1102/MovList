@@ -1,19 +1,11 @@
 import SimilarMovieItem from "./SimilarMovieItem";
 
-const SimilarMovieList = () => {
+const SimilarMovieList = ({ similar }) => {
   return (
     <div className="mt-9 lg:max-h-[600px] lg:overflow-y-scroll pb-20 pr-5 scrollbar-thin scrollbar-thumb-primary">
-      <SimilarMovieItem />
-      <SimilarMovieItem />
-      <SimilarMovieItem />
-      <SimilarMovieItem />
-      <SimilarMovieItem />
-      <SimilarMovieItem />
-      <SimilarMovieItem />
-      <SimilarMovieItem />
-      <SimilarMovieItem />
-      <SimilarMovieItem />
-      <SimilarMovieItem />
+      {similar.map((mov, id) => (
+        <SimilarMovieItem key={id} movie={mov} />
+      ))}
     </div>
   );
 };

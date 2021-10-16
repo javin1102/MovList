@@ -103,6 +103,7 @@ export default class MovieAPI {
           vote_count
           overview
           poster_path
+          
         }
       }
       `,
@@ -116,6 +117,14 @@ export default class MovieAPI {
         query{
           similar_movie(id:${id}){
             id
+            title
+            poster_path
+            release_date
+            genre_name
+            release_date
+            vote_average
+            vote_count
+            backdrop_path
           }
         }
       `,

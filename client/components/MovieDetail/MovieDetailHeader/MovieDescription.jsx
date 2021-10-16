@@ -2,18 +2,26 @@ import H2 from "../../UI/H2";
 import MovieDescriptionList from "./MovieDescriptionList";
 import MovieDetailRating from "./MovieDescriptionRating";
 
-const MovieDescription = () => {
+const MovieDescription = ({ movie }) => {
   return (
     <div className="font-poppins ml-6 flex flex-col justify-between">
-      <H2>The Jungle Book</H2>
+      <H2>{movie.title}</H2>
       <ul className="text-xs md:text-sm lg:text-base">
-        <MovieDescriptionList type="IMDB ID" res="tt0123456" />
-        <MovieDescriptionList type="Genre" res="Action, Fantasy" />
-        <MovieDescriptionList type="Released" res="1992-10-10" />
-        <MovieDescriptionList type="Duration" res="139 minutes" />
-        <MovieDescriptionList type="Region" res="USA" />
+        <MovieDescriptionList type="IMDB ID" res={movie.imdb_id} />
+        <MovieDescriptionList
+          type="Genre"
+          res={movie.genres.map((genre) => genre.name).join(", ")}
+        />
+        <MovieDescriptionList type="Released" res={movie.release_date} />
+        <MovieDescriptionList
+          type="Duration"
+          res={`${movie.runtime} minutes`}
+        />
       </ul>
-      <MovieDetailRating />
+      <MovieDetailRating
+        average={movie.vote_average}
+        count={movie.vote_count}
+      />
     </div>
   );
 };

@@ -1,11 +1,11 @@
 import MovieDescription from "./MovieDetailHeader/MovieDescription";
 import MovieDetailPoster from "./MovieDetailHeader/MoviePoster";
 
-const MovieHeader = () => {
+const MovieHeader = ({ movie }) => {
   return (
     <div className="flex">
-      <MovieDetailPoster />
-      <MovieDescription />
+      <MovieDetailPoster poster={movie.poster_path} />
+      <MovieDescription movie={movie} />
     </div>
   );
 };

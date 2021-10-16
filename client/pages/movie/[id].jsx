@@ -5,24 +5,24 @@ import MovieSynopsis from "../../components/MovieDetail/MovieDetailSynopsis";
 import CommenSection from "../../components/Comment/CommentSection";
 import SimilarMovieLayout from "../../components/MovieDetail/SimilarMovie/SimilarMovieLayout";
 import MovieAPI from "../../utils/MovieApi";
-const MovieDetail = (props) => {
-  console.log(props.movie);
+const MovieDetail = ({ movie, similar_movie }) => {
+  console.log(similar_movie);
   return (
     <>
       <Nav />
       <MovieDetailLayout>
-        <MovieHeader />
-        <MovieSynopsis />
+        <MovieHeader movie={movie} />
+        <MovieSynopsis overview={movie.overview} />
         <hr className="text-primary border-t-2" />
         <CommenSection />
       </MovieDetailLayout>
-      <SimilarMovieLayout />
+      <SimilarMovieLayout similar={similar_movie} />
     </>
   );
 };
 
 export default MovieDetail;
-export async function getStaticPaths(ctx) {
+export async function getStaticPaths() {
   const moviesId = await MovieAPI.getAllMovieId();
 
   return {
@@ -31,12 +31,12 @@ export async function getStaticPaths(ctx) {
         id: `${mov.id}`,
       },
     })),
+
     fallback: false,
   };
 }
 export async function getStaticProps(ctx) {
   const { id } = ctx.params;
-  console.log(id);
   const movie = await MovieAPI.getMovie(id);
   const similar_movie = await MovieAPI.getSimilarMovie(id);
   return {
