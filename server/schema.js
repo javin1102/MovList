@@ -23,9 +23,10 @@ const GenreType = new GraphQLObjectType({
 });
 
 const MoviesType = new GraphQLObjectType({
-  name: "NewMovies",
+  name: "Movie",
   fields: {
     id: { type: GraphQLInt },
+    imdb_id: { type: GraphQLString },
     title: { type: GraphQLString },
     overview: { type: GraphQLString },
     release_date: { type: GraphQLString },
@@ -35,6 +36,7 @@ const MoviesType = new GraphQLObjectType({
     backdrop_path: { type: GraphQLString },
     genres: { type: new GraphQLList(GenreType) },
     runtime: { type: GraphQLInt },
+    vote_count: { type: GraphQLInt },
   },
 });
 
@@ -58,6 +60,26 @@ const RootQueryType = new GraphQLObjectType({
             movie.backdrop_path = backdropImageURL + movie.backdrop_path;
 
             return movie;
+          });
+      },
+    },
+    similar_movie: {
+      type: new GraphQLList(MoviesType),
+      args: {
+        id: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        return axios
+          .get(
+            `https://api.themoviedb.org/3/movie/${args.id}/similar?api_key=${YOUR_API}&language=en-US&page=1`
+          )
+          .then((res) => {
+            const movies = res.data.results;
+            movies.map((movie) => {
+              movie.poster_path = posterImageURL + movie.poster_path;
+              movie.backdrop_path = backdropImageURL + movie.backdrop_path;
+            });
+            return movies;
           });
       },
     },
