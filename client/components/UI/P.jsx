@@ -1,7 +1,7 @@
 const P = (props) => {
   return (
     <p
-      className={`font-normal text-gray text-xs md:text-sm lg:text-base ${props.className}`}
+      className={` ${props.className} font-normal text-xs md:text-sm lg:text-base text-gray`}
     >
       {props.children}
     </p>

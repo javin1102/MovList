@@ -30,7 +30,7 @@ export async function getStaticPaths() {
         id: `${mov.id}`,
       },
     })),
-    fallback: true,
+    fallback: "blocking",
   };
 }
 export async function getStaticProps(ctx) {

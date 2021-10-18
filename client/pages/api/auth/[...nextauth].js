@@ -7,7 +7,6 @@ export default NextAuth({
       clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
       clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
       profile(profile) {
-        console.log(profile.id);
         return {
           id: profile.id,
           name: profile.name,

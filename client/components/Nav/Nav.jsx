@@ -4,28 +4,38 @@ import Image from "next/image";
 import Link from "next/link";
 import Search from "../../public/svg/search.svg";
 import RoundedButton from "../UI/RoundedButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavList from "./NavList";
 import SearchBar from "../UI/SearchBar";
 import Overlay from "../UI/Overlay";
 import { useTop } from "../../hooks/use-top";
 import { signIn, useSession, signOut } from "next-auth/client";
+import { userAction } from "../../redux/user-slice";
+import { useDispatch } from "react-redux";
 const Nav = ({ isHomePage }) => {
   const { isTop } = useTop();
   const [isOpenHamburger, setIsOpenHamburger] = useState(false);
   const [isClickSearch, setIsClickSearch] = useState(false);
   const [session] = useSession();
+  const dispatch = useDispatch();
   const navBGColor =
     isTop && isHomePage ? "bg-[rgba(24,24,24,0.7)]" : "bg-white";
 
   const navBrandColor = isTop && isHomePage ? "text-white" : "text-black";
-
   const signButtonText = session ? "Sign Out" : "Sign In";
   const signButtonHandler = () => {
     if (!session) signIn("google");
-    else signOut();
+    else {
+      signOut();
+      useDispatch(userAction.reset());
+    }
   };
   const signButtonImgSrc = session ? session.user.image : Google;
+  useEffect(() => {
+    if (session) {
+      dispatch(userAction.setUserId({ id: session.user.id }));
+    }
+  }, [session]);
   return (
     <>
       <Overlay
