@@ -28,7 +28,6 @@ const Nav = ({ isHomePage }) => {
   const signButtonImgSrc = session ? session.user.image : Google;
   return (
     <>
-      {session && console.log(session)}
       <Overlay
         isClickSearch={isClickSearch}
         isOpenHamburger={isOpenHamburger}

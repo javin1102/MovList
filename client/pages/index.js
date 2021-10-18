@@ -5,6 +5,7 @@ import { client } from "../utils/ApolloClient";
 import { ApolloProvider } from "@apollo/client";
 import MovieAPI from "../utils/MovieApi";
 import Footer from "../components/Footer/Footer";
+
 export default function Home({
   upcoming,
   popular,
