@@ -249,19 +249,6 @@ export default class MovieAPI {
       ...top_rated2.data.top_rated,
     ];
 
-    const getSimilarMoviesId = async (id) => {
-      const similarMovie = await client.query({
-        query: gql`
-          query{
-            similar_movie(id:${id}){
-              id
-            }
-          }
-        `,
-      });
-      return similarMovie.data.similar_movie;
-    };
-
     const moviesId = [
       ...upcoming,
       ...popular,
@@ -269,11 +256,6 @@ export default class MovieAPI {
       ...recommendation,
       ...top_rated,
     ];
-
-    const similar = await Promise.all(
-      moviesId.map((mov) => getSimilarMoviesId(mov.id))
-    );
-
-    return [...moviesId, ...similar];
+    return moviesId;
   }
 }
