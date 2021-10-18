@@ -5,7 +5,6 @@ import MovieSynopsis from "../../components/MovieDetail/MovieDetailSynopsis";
 import CommenSection from "../../components/Comment/CommentSection";
 import SimilarMovieLayout from "../../components/MovieDetail/SimilarMovie/SimilarMovieLayout";
 import MovieAPI from "../../utils/MovieApi";
-import { useRouter } from "next/router";
 const MovieDetail = ({ movie, similar_movie }) => {
   return (
     <>

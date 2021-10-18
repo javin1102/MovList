@@ -9,18 +9,26 @@ import NavList from "./NavList";
 import SearchBar from "../UI/SearchBar";
 import Overlay from "../UI/Overlay";
 import { useTop } from "../../hooks/use-top";
+import { signIn, useSession, signOut } from "next-auth/client";
 const Nav = ({ isHomePage }) => {
   const { isTop } = useTop();
   const [isOpenHamburger, setIsOpenHamburger] = useState(false);
   const [isClickSearch, setIsClickSearch] = useState(false);
-
+  const [session] = useSession();
   const navBGColor =
     isTop && isHomePage ? "bg-[rgba(24,24,24,0.7)]" : "bg-white";
 
   const navBrandColor = isTop && isHomePage ? "text-white" : "text-black";
 
+  const signButtonText = session ? "Sign Out" : "Sign In";
+  const signButtonHandler = () => {
+    if (!session) signIn("google");
+    else signOut();
+  };
+  const signButtonImgSrc = session ? session.user.image : Google;
   return (
     <>
+      {session && console.log(session)}
       <Overlay
         isClickSearch={isClickSearch}
         isOpenHamburger={isOpenHamburger}
@@ -65,11 +73,11 @@ const Nav = ({ isHomePage }) => {
           />
 
           {/*Google Login Button*/}
-          <RoundedButton color="tertiary">
-            <span className="w-4 h-4 mr-2 relative">
-              <Image src={Google} layout="fill" />
+          <RoundedButton color="tertiary" onClick={signButtonHandler}>
+            <span className="w-6 h-6 mr-2 relative rounded-full overflow-hidden">
+              <Image src={signButtonImgSrc} layout="fill" alt="user profile " />
             </span>
-            Sign in
+            {signButtonText}
           </RoundedButton>
         </div>
 
