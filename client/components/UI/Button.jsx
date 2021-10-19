@@ -7,6 +7,7 @@ const Button = (props) => {
       type="submit"
       className={`${buttonState} text-white font-poppins px-4 py-2 font-medium text-xs md:text-sm rounded-lg`}
       disabled={!props.isAbleToSubmit}
+      onClick={props.onClick}
     >
       {props.children}
     </button>

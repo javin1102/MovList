@@ -16,6 +16,7 @@ const Nav = ({ isHomePage }) => {
   const { isTop } = useTop();
   const [isOpenHamburger, setIsOpenHamburger] = useState(false);
   const [isClickSearch, setIsClickSearch] = useState(false);
+  const [isClickOverlay, setIsClickOverlay] = useState(false);
   const [session] = useSession();
   const dispatch = useDispatch();
   const navBGColor =
@@ -36,14 +37,23 @@ const Nav = ({ isHomePage }) => {
       dispatch(userAction.setUserId({ id: session.user.id }));
     }
   }, [session]);
+
+  useEffect(() => {
+    if (isClickOverlay) {
+      setIsClickSearch(false);
+      setIsClickOverlay(false);
+      setIsOpenHamburger(false);
+    }
+  }, [isClickOverlay]);
+
   return (
     <>
-      <Overlay
-        isClickSearch={isClickSearch}
-        isOpenHamburger={isOpenHamburger}
-        openHamburgerHandler={setIsOpenHamburger}
-        isClickSearchHandler={setIsClickSearch}
-      />
+      {(isOpenHamburger || isClickSearch) && (
+        <Overlay
+          setIsClickOverlay={setIsClickOverlay}
+          bgColor={`bg-[rgba(0,0,0,0.85)]`}
+        />
+      )}
       <nav
         className={`h-16 sm:h-20 lg:h-24 w-full bg-gray-700 flex items-center sm:px-6 px-4 ${navBGColor} shadow-md fixed top-0 z-30 lg:px-12 transition-colors`}
       >

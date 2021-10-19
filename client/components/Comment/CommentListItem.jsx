@@ -3,15 +3,26 @@ import P from "../UI/P";
 import CommentProfilePic from "./CommentProfilePic";
 import Image from "next/image";
 import Trash from "../../public/svg/trash.svg";
+import { timeSince } from "../../utils/IntervalDateFormat";
+import { useDispatch } from "react-redux";
+import { uiAction } from "../../redux/ui-slice";
+import { useSelector } from "react-redux";
+import Modal from "../UI/Modal";
+import { useMemo } from "react";
+
 const CommentListItem = ({ comment }) => {
+  const dispatch = useDispatch();
+  const { modal } = useSelector((state) => state.ui);
+  const date = useMemo(() => timeSince(comment.date), [comment.date]);
   return (
     <div className="flex flex-row w-full mb-12">
+      {modal && <Modal />}
       <CommentProfilePic src={comment.userImgSrc} />
       <div className="flex w-full flex-col ml-2 mt-1 md:ml-3 lg:ml-4">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center">
             <H3 className="w-[fit-content]">{comment.username}</H3>
-            <P className="ml-3 lg:text-xs">3 minutes ago</P>
+            <p className="ml-3 text-xs text-gray">{date}</p>
           </div>
           <Image
             className="cursor-pointer"
@@ -19,6 +30,9 @@ const CommentListItem = ({ comment }) => {
             layout="fixed"
             width={20}
             height={20}
+            onClick={() => {
+              dispatch(uiAction.setModal({ modal: true }));
+            }}
           />
         </div>
 

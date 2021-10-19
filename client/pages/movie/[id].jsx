@@ -5,9 +5,11 @@ import MovieSynopsis from "../../components/MovieDetail/MovieDetailSynopsis";
 import CommenSection from "../../components/Comment/CommentSection";
 import SimilarMovieLayout from "../../components/MovieDetail/SimilarMovie/SimilarMovieLayout";
 import MovieAPI from "../../utils/MovieApi";
+
 const MovieDetail = ({ movie, similar_movie }) => {
   return (
     <>
+      <div id="modal"></div>
       <Nav />
       <MovieDetailLayout>
         <MovieHeader movie={movie} />

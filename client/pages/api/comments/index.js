@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       const commentCollection = db.collection("movieComments");
       await commentCollection.insertOne(comment);
       const query = { movieId: comment.movieId };
-      const movieComments = await await commentCollection
+      const movieComments = await commentCollection
         .find(query)
         .sort({ date: -1 })
         .toArray();

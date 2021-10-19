@@ -1,17 +1,9 @@
-const Overlay = ({
-  isOpenHamburger,
-  isClickSearch,
-  openHamburgerHandler,
-  isClickSearchHandler,
-}) => {
-  const overlayController =
-    isOpenHamburger || isClickSearch ? "block" : "hidden";
+const Overlay = ({ setIsClickOverlay, bgColor }) => {
   return (
     <div
-      className={`${overlayController} fixed top-0 left-0 h-screen bg-[rgba(0,0,0,0.8)] w-full z-10`}
+      className={`block fixed top-0 left-0 h-screen ${bgColor} w-full z-20`}
       onClick={() => {
-        openHamburgerHandler(false);
-        isClickSearchHandler(false);
+        setIsClickOverlay(true);
       }}
     ></div>
   );
