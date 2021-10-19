@@ -16,6 +16,7 @@ export default async function handler(req, res) {
       const query = { movieId: comment.movieId };
       const movieComments = await commentCollection
         .find(query)
+        .limit(20)
         .sort({ date: -1 })
         .toArray();
       await client.close();
@@ -29,7 +30,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method === "GET") {
-    const { id } = req.query;
+    const { movieId } = req.query;
 
     try {
       const client = await MongoClient.connect(process.env.NEXT_PUBLIC_DB_URI, {
@@ -39,10 +40,11 @@ export default async function handler(req, res) {
 
       const db = client.db("MovList");
       const commentCollection = db.collection("movieComments");
-      const query = { movieId: id };
+      const query = { movieId };
       const movieComments = await commentCollection
         .find(query)
         .sort({ date: -1 })
+        .limit(20)
         .toArray();
       await client.close();
       return res

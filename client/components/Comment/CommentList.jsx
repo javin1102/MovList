@@ -6,12 +6,11 @@ import { useEffect } from "react";
 const CommentList = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { id } = router.query;
+  const { id: movieId } = router.query;
   const { comments } = useSelector((state) => state.comments);
-  console.log(comments);
   useEffect(() => {
-    dispatch(getCommentAction({ id }));
-  }, [id]);
+    dispatch(getCommentAction(movieId));
+  }, [movieId]);
 
   return (
     <div className="w-full mt-8">
@@ -19,9 +18,6 @@ const CommentList = () => {
         comments.map((comment, id) => (
           <CommentListItem key={id} comment={comment} />
         ))}
-      {/* <CommentListItem />
-      <CommentListItem />
-      <CommentListItem /> */}
     </div>
   );
 };

@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "./Button";
 import { uiAction } from "../../redux/ui-slice";
 import Overlay from "./Overlay";
-
+import { deleteCommentAction } from "../../redux/commentAction";
+import { useRouter } from "next/router";
 export const Modal = () => {
-  const [isClickOverlay, setIsClickOverlay] = useState(false);
   const portalEl = document.getElementById("modal");
+  const [isClickOverlay, setIsClickOverlay] = useState(false);
   const dispatch = useDispatch();
+  const { modal } = useSelector((state) => state.ui);
+
+  const router = useRouter();
+  const { id: movieId } = router.query;
   useEffect(() => {
     if (isClickOverlay) {
-      dispatch(uiAction.setModal({ modal: false }));
+      dispatch(uiAction.resetModal());
     }
   }, [isClickOverlay]);
   return (
@@ -30,13 +35,16 @@ export const Modal = () => {
             <div className="ml-auto mt-8 ">
               <span
                 className="text-black font-medium mr-3 md:mr-5 text-xs sm:text-sm md:text-base lg:mr-8 cursor-pointer active:text-gray"
-                onClick={() => dispatch(uiAction.setModal({ modal: false }))}
+                onClick={() => dispatch(uiAction.resetModal())}
               >
                 Cancel
               </span>
               <Button
                 isAbleToSubmit={true}
-                onClick={() => dispatch(uiAction.setModal({ modal: false }))}
+                onClick={() => {
+                  dispatch(uiAction.resetModal());
+                  dispatch(deleteCommentAction(modal.commentId, movieId));
+                }}
               >
                 Delete
               </Button>

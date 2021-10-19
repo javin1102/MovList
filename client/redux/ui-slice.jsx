@@ -1,13 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   overlay: false,
-  modal: false,
+  modal: {
+    isOpen: false,
+    commentId: "",
+  },
   loading: false,
 };
 const uiSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
+    resetModal: (state) => {
+      state.modal = { isOpen: false, commentId: "" };
+    },
     setOverlay: (state, action) => {
       state.overlay = action.payload.overlay;
     },

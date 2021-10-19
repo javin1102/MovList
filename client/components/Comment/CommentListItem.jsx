@@ -14,9 +14,10 @@ const CommentListItem = ({ comment }) => {
   const dispatch = useDispatch();
   const { modal } = useSelector((state) => state.ui);
   const date = useMemo(() => timeSince(comment.date), [comment.date]);
+
   return (
     <div className="flex flex-row w-full mb-12">
-      {modal && <Modal />}
+      {modal.isOpen && <Modal />}
       <CommentProfilePic src={comment.userImgSrc} />
       <div className="flex w-full flex-col ml-2 mt-1 md:ml-3 lg:ml-4">
         <div className="flex w-full items-center justify-between">
@@ -31,7 +32,8 @@ const CommentListItem = ({ comment }) => {
             width={20}
             height={20}
             onClick={() => {
-              dispatch(uiAction.setModal({ modal: true }));
+              const modal = { isOpen: true, commentId: comment.commentId };
+              dispatch(uiAction.setModal({ modal }));
             }}
           />
         </div>

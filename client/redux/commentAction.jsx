@@ -25,10 +25,10 @@ export const postCommentsAction = (data) => {
   };
 };
 
-export const getCommentAction = ({ id }) => {
+export const getCommentAction = (movieId) => {
   return async (dispatch) => {
     try {
-      const getRes = await axios.get("/api/comments", { params: { id } });
+      const getRes = await axios.get("/api/comments", { params: { movieId } });
       const { movieComments } = getRes.data;
       dispatch(commentAction.setComments({ comments: movieComments }));
     } catch (err) {
@@ -37,10 +37,14 @@ export const getCommentAction = ({ id }) => {
   };
 };
 
-export const deleteCommentAction = (commentId) => {
+export const deleteCommentAction = (commentId, movieId) => {
   return async (dispatch) => {
     try {
-      const deleteRes = await axios.delete(`/comments/${commentId}`);
+      const deleteRes = await axios.delete(`/api/comments/${commentId}`, {
+        params: { movieId },
+      });
+      console.log(deleteRes);
+      dispatch(commentAction.removeComment({ id: commentId }));
     } catch (err) {
       console.error(err.response.status);
     }
