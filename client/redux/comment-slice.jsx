@@ -24,12 +24,12 @@ const commentSlice = createSlice({
       state.comments.unshift(comment);
     },
     removeComment: (state, action) => {
-      const { id } = action.payload.id;
-      const selectedComment = state.comments.filter(
-        (comment) =>
-          comment.id !== id && comment.userId !== action.payload.userId
+      const { commentId } = action.payload;
+      console.log(commentId);
+      const newComments = state.comments.filter(
+        (comment) => comment.commentId !== commentId
       );
-      state.comments = selectedComment;
+      state.comments = newComments;
     },
   },
 });

@@ -1,7 +1,6 @@
 import { MongoClient } from "mongodb";
 export default async function handler(req, res) {
   if (req.method === "DELETE") {
-    console.log(req.query);
     const { commentId, movieId } = req.query;
 
     try {

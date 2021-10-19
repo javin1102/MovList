@@ -10,9 +10,19 @@ const MovieDescription = ({ movie }) => {
         <MovieDescriptionList type="IMDB ID" res={movie.imdb_id} />
         <MovieDescriptionList
           type="Genre"
-          res={movie.genres.map((genre) => genre.name).join(", ")}
+          res={movie.genres
+            .map((genre) => genre.name)
+            .sort()
+            .join(", ")}
         />
-        <MovieDescriptionList type="Released" res={movie.release_date} />
+        <MovieDescriptionList
+          type="Released"
+          res={new Intl.DateTimeFormat("en-US", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          }).format(new Date(movie.release_date))}
+        />
         <MovieDescriptionList
           type="Duration"
           res={`${movie.runtime} minutes`}

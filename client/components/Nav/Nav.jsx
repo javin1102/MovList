@@ -28,7 +28,7 @@ const Nav = ({ isHomePage }) => {
     if (!session) signIn("google");
     else {
       signOut();
-      useDispatch(userAction.reset());
+      dispatch(userAction.reset());
     }
   };
   const signButtonImgSrc = session ? session.user.image : Google;
@@ -60,11 +60,11 @@ const Nav = ({ isHomePage }) => {
         {/*Nav Brand*/}
         <Link href="/">
           <div className="flex flex-row items-center cursor-pointer">
-            <div className="w-7 sm:w-10 lg:w-12">
+            <div className="w-6 sm:w-10 lg:w-12">
               <Image src={Logo} />
             </div>
             <div
-              className={`text-md sm:text-2xl lg:text-4xl font-poppins ml-3 font-bold ${navBrandColor}`}
+              className={`text-sm sm:text-2xl lg:text-4xl font-poppins ml-3 font-bold ${navBrandColor}`}
             >
               MovList
             </div>

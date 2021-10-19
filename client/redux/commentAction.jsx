@@ -17,7 +17,7 @@ export const postCommentsAction = (data) => {
     try {
       const postRes = await postCommentRequest();
       const { movieComments } = postRes.data;
-      console.log(movieComments);
+      // console.log(movieComments);
       dispatch(commentAction.setComments({ comments: movieComments }));
     } catch (err) {
       console.error(err.response.status);
@@ -44,7 +44,7 @@ export const deleteCommentAction = (commentId, movieId) => {
         params: { movieId },
       });
       console.log(deleteRes);
-      dispatch(commentAction.removeComment({ id: commentId }));
+      dispatch(commentAction.removeComment({ commentId }));
     } catch (err) {
       console.error(err.response.status);
     }
