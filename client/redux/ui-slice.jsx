@@ -5,7 +5,8 @@ const initialState = {
     isOpen: false,
     commentId: "",
   },
-  loading: false,
+  getLoading: false,
+  postLoading: false,
 };
 const uiSlice = createSlice({
   name: "ui",
@@ -14,17 +15,15 @@ const uiSlice = createSlice({
     resetModal: (state) => {
       state.modal = { isOpen: false, commentId: "" };
     },
-    setOverlay: (state, action) => {
-      state.overlay = action.payload.overlay;
-    },
+
     setModal: (state, action) => {
       state.modal = action.payload.modal;
     },
-    setOverlay: (state, action) => {
-      state.loading = action.payload.loading;
+    setGetLoading: (state, action) => {
+      state.getLoading = action.payload.getLoading;
     },
-    setLoading: (state, action) => {
-      state.loading = action.payload.loading;
+    setPostLoading: (state, action) => {
+      state.postLoading = action.payload.postLoading;
     },
   },
 });

@@ -2,7 +2,7 @@ import { commentAction } from "./comment-slice";
 import { uiAction } from "./ui-slice";
 import axios from "axios";
 
-export const postCommentsAction = (data) => {
+export const postCommentsAction = (comment) => {
   return async (dispatch) => {
     const postCommentRequest = async () => {
       const config = {
@@ -10,36 +10,39 @@ export const postCommentsAction = (data) => {
           "Content-Type": "application/json",
         },
       };
-      const body = JSON.stringify(data);
+      const body = JSON.stringify(comment);
       const res = await axios.post(`/api/comments`, body, config);
       return res;
     };
 
     try {
-      dispatch(uiAction.setLoading({ loading: true }));
-      const postRes = await postCommentRequest();
-      const { movieComments } = postRes.data;
-      // console.log(movieComments);
-      dispatch(commentAction.setComments({ comments: movieComments }));
-      dispatch(uiAction.setLoading({ loading: false }));
+      dispatch(uiAction.setPostLoading({ postLoading: true }));
+      await postCommentRequest();
+      dispatch(commentAction.addComment({ comment }));
+      dispatch(uiAction.setPostLoading({ postLoading: false }));
     } catch (err) {
       console.error(err.response.status);
-      dispatch(uiAction.setLoading({ loading: false }));
+      dispatch(uiAction.setPostLoading({ postLoading: false }));
     }
   };
 };
 
-export const getCommentAction = (movieId) => {
+export const getCommentAction = (movieId, length) => {
   return async (dispatch) => {
     try {
-      dispatch(uiAction.setLoading({ loading: true }));
-      const getRes = await axios.get("/api/comments", { params: { movieId } });
-      const { movieComments } = getRes.data;
-      dispatch(commentAction.setComments({ comments: movieComments }));
-      dispatch(uiAction.setLoading({ loading: false }));
+      dispatch(uiAction.setGetLoading({ getLoading: true }));
+      const getRes = await axios.get("/api/comments", {
+        params: { movieId, length },
+      });
+
+      const { movieComments, lastComment } = getRes.data;
+
+      dispatch(commentAction.loadMoreComment({ comments: movieComments }));
+      dispatch(commentAction.setLastComment({ lastComment }));
+      dispatch(uiAction.setGetLoading({ getLoading: false }));
     } catch (err) {
       console.error(err.response.status);
-      dispatch(uiAction.setLoading({ loading: false }));
+      dispatch(uiAction.setGetLoading({ getLoading: false }));
     }
   };
 };
@@ -47,16 +50,16 @@ export const getCommentAction = (movieId) => {
 export const deleteCommentAction = (commentId, movieId) => {
   return async (dispatch) => {
     try {
-      dispatch(uiAction.setLoading({ loading: true }));
-      const deleteRes = await axios.delete(`/api/comments/${commentId}`, {
+      dispatch(uiAction.setPostLoading({ postLoading: true }));
+      await axios.delete(`/api/comments/${commentId}`, {
         params: { movieId },
       });
 
       dispatch(commentAction.removeComment({ commentId }));
-      dispatch(uiAction.setLoading({ loading: false }));
+      dispatch(uiAction.setPostLoading({ postLoading: false }));
     } catch (err) {
       console.error(err.response.status);
-      dispatch(uiAction.setLoading({ loading: false }));
+      dispatch(uiAction.setPostLoading({ postLoading: false }));
     }
   };
 };

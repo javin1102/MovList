@@ -11,6 +11,7 @@ const AddComment = () => {
   const [isAbleToSubmit, setIsAbleToSubmit] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [session] = useSession();
+
   const router = useRouter();
   const dispatch = useDispatch();
   const { id } = router.query;
@@ -57,7 +58,7 @@ const AddComment = () => {
   }, [inputValue]);
 
   return (
-    <div className="flex w-full mt-8 overflow-hidden">
+    <div className="flex w-full mt-8 mb-3 lg:mt-12 overflow-hidden">
       <CommentProfilePic src={session && session.user.image} />
       <form
         className="w-full mt-2 text-xs md:text-sm overflow-hidden"

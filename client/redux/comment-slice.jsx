@@ -2,26 +2,23 @@ import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 const initialState = {
   comments: [],
+  lastComment: {},
+  hasFetch: false,
 };
 const commentSlice = createSlice({
   name: "comments",
   initialState,
   reducers: {
     reset: () => initialState,
-    setComments: (state, action) => {
-      state.comments = action.payload.comments;
-    },
+
     addComment: (state, action) => {
-      const comment = {
-        commentId: uuidv4(),
-        username: action.payload.username,
-        userId: action.payload.userId,
-        userImgSrc: action.payload.src,
-        text: action.payload.comment,
-        movieId: action.payload.movieId,
-        date: Date.now(),
-      };
+      const { comment } = action.payload;
       state.comments.unshift(comment);
+    },
+    loadMoreComment: (state, action) => {
+      const { comments } = action.payload;
+      state.comments = [...state.comments, ...comments];
+      state.hasFetch = true;
     },
     removeComment: (state, action) => {
       const { commentId } = action.payload;
@@ -30,6 +27,9 @@ const commentSlice = createSlice({
         (comment) => comment.commentId !== commentId
       );
       state.comments = newComments;
+    },
+    setLastComment: (state, action) => {
+      state.lastComment = action.payload.lastComment;
     },
   },
 });

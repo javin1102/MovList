@@ -20,6 +20,9 @@ export const useSlideShowNum = () => {
     if (width <= 1880) {
       setSlideShowNum(6);
       return;
+    } else {
+      setSlideShowNum(8);
+      return;
     }
   }, [width, slidesShowNum]);
 

@@ -1,5 +1,4 @@
 import { MongoClient } from "mongodb";
-// import { client } from "../../utils/DB";
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const comment = req.body;
@@ -13,16 +12,8 @@ export default async function handler(req, res) {
       const db = client.db();
       const commentCollection = db.collection("movieComments");
       await commentCollection.insertOne(comment);
-      const query = { movieId: comment.movieId };
-      const movieComments = await commentCollection
-        .find(query)
-        .limit(20)
-        .sort({ date: -1 })
-        .toArray();
       await client.close();
-      return res
-        .status(200)
-        .json({ msg: "Success post a comment!", movieComments });
+      return res.status(200).json({ msg: "Success post a comment!" });
     } catch (err) {
       console.error(err.message);
       return res.status(500).json({ msg: "Server Error" });
@@ -30,7 +21,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method === "GET") {
-    const { movieId } = req.query;
+    const { movieId, length } = req.query;
 
     try {
       const client = await MongoClient.connect(process.env.NEXT_PUBLIC_DB_URI, {
@@ -43,13 +34,20 @@ export default async function handler(req, res) {
       const query = { movieId };
       const movieComments = await commentCollection
         .find(query)
+        .skip(Number(length))
         .sort({ date: -1 })
-        .limit(20)
+        .limit(5)
         .toArray();
+      const lastComment = await commentCollection.findOne(
+        {},
+        { sort: { _id: 1 } }
+      );
       await client.close();
-      return res
-        .status(200)
-        .json({ msg: "Success retrieving comments", movieComments });
+      return res.status(200).json({
+        msg: "Success retrieving comments",
+        movieComments,
+        lastComment,
+      });
     } catch (err) {
       console.error(err.message);
       return res.status(500).json({ msg: "Server Error" });
