@@ -20,8 +20,10 @@ const uiSlice = createSlice({
     setModal: (state, action) => {
       state.modal = action.payload.modal;
     },
-
     setOverlay: (state, action) => {
+      state.loading = action.payload.loading;
+    },
+    setLoading: (state, action) => {
       state.loading = action.payload.loading;
     },
   },

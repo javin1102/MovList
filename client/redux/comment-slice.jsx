@@ -25,7 +25,7 @@ const commentSlice = createSlice({
     },
     removeComment: (state, action) => {
       const { commentId } = action.payload;
-      console.log(commentId);
+
       const newComments = state.comments.filter(
         (comment) => comment.commentId !== commentId
       );
