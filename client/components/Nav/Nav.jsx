@@ -22,11 +22,7 @@ const Nav = ({ isHomePage }) => {
   const navBrandColor = isTop && isHomePage ? "text-white" : "text-black";
   const signButtonText = session ? "Sign Out" : "Sign In";
   const signButtonHandler = () => {
-    if (!session)
-      signIn("google", {
-        callbackUrl: `${process.env.NEXTAUTH_URL}`,
-        redirect: false,
-      });
+    if (!session) signIn();
     else {
       signOut();
     }
