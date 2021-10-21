@@ -1,6 +1,6 @@
 import Search from "../../public/svg/search.svg";
 import Image from "next/image";
-import router, { useRouter } from "next/router";
+import router from "next/router";
 import { useState, useRef } from "react";
 
 const SearchBar = ({ isTop, isClickSearch, isHomePage }) => {

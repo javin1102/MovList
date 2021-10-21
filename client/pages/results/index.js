@@ -6,15 +6,21 @@ import { useEffect, useState } from "react";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "../../utils/ApolloClient";
 import Link from "next/link";
+import Loader from "react-loader-spinner";
+import { uiAction } from "../../redux/ui-slice";
+import { useDispatch, useSelector } from "react-redux";
 const Results = () => {
   const [results, setResults] = useState([]);
   const router = useRouter();
   const { search } = router.query;
-
+  const { getLoading } = useSelector((state) => state.ui);
+  const dispatch = useDispatch();
   useEffect(async () => {
     if (search) {
+      dispatch(uiAction.setGetLoading({ getLoading: true }));
       const movies = await MovieAPI.getSearchMovies(search);
       setResults(movies);
+      dispatch(uiAction.setGetLoading({ getLoading: false }));
     }
   }, [search]);
 
@@ -26,8 +32,14 @@ const Results = () => {
         <h1 className="font-bold text-lg font-poppins sm:text-xl md:text-2xl lg:text-3xl">
           {search}
         </h1>
+        {getLoading && (
+          <div className="mx-auto w-[fit-content] mt-20">
+            <Loader type="ThreeDots" color="#000000" height={50} width={50} />
+          </div>
+        )}
         <div className="mt-8 grid justify-items-center gap-4 md:gap-6 lg:gap-8 grid-cols-[repeat(auto-fit,8rem)] md:grid-cols-[repeat(auto-fit,10rem)] lg:grid-cols-[repeat(auto-fit,12rem)] ">
-          {results.length > 0 &&
+          {!getLoading &&
+            results.length > 0 &&
             results.map((result, i) => (
               <Link href={`/movie/${result.id}`} key={i}>
                 <a className="flex flex-col items-center w-min overflow-hidden cursor-pointer">

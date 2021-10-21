@@ -3,6 +3,13 @@ import MovieDescriptionList from "./MovieDescriptionList";
 import MovieDetailRating from "./MovieDescriptionRating";
 
 const MovieDescription = ({ movie }) => {
+  const date = movie.release_date
+    ? new Intl.DateTimeFormat("en-US", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }).format(new Date(movie.release_date))
+    : "-";
   return (
     <div className="font-poppins ml-6 flex flex-col justify-between">
       <H2>{movie.title}</H2>
@@ -15,14 +22,7 @@ const MovieDescription = ({ movie }) => {
             .sort()
             .join(", ")}
         />
-        <MovieDescriptionList
-          type="Released"
-          res={new Intl.DateTimeFormat("en-US", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          }).format(new Date(movie.release_date))}
-        />
+        <MovieDescriptionList type="Released" res={date} />
         <MovieDescriptionList
           type="Duration"
           res={`${movie.runtime} minutes`}
