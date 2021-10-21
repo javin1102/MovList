@@ -243,6 +243,30 @@ const RootQueryType = new GraphQLObjectType({
           });
       },
     },
+    search: {
+      type: new GraphQLList(MoviesType),
+      args: {
+        query: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return axios
+          .get(
+            `https://api.themoviedb.org/3/search/movie?api_key=${YOUR_API}&language=en-US&query=${args.query}&page=1&include_adult=true`
+          )
+          .then((res) => {
+            const movies = res.data.results;
+            movies.map((movie) => {
+              movie.poster_path = posterImageURL + movie.poster_path;
+              movie.backdrop_path = backdropImageURL + movie.backdrop_path;
+              movie.genre_name = movie.genre_ids.map(
+                (id) => genres.find((genre) => genre.id === id).name
+              );
+            });
+
+            return movies;
+          });
+      },
+    },
   },
 });
 

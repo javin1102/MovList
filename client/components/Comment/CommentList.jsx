@@ -28,7 +28,7 @@ const CommentList = () => {
           comments[comments.length - 1].commentId === lastComment.commentId)
       )
         return;
-      console.log("fetch data ");
+
       if (!getLoading) {
         dispatch(getCommentAction(movieId, comments.length));
       }
@@ -36,6 +36,8 @@ const CommentList = () => {
   });
 
   useEffect(() => {
+    //fetch comment if change page
+    dispatch(getCommentAction(movieId, comments.length));
     //Reset comment list if change page
     dispatch(commentAction.reset());
   }, [movieId]);

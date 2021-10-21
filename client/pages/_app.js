@@ -7,6 +7,7 @@ import NextNProgress from "nextjs-progressbar";
 import Head from "next/head";
 import { Provider } from "next-auth/client";
 import { Provider as ReduxProvider } from "react-redux";
+
 import store from "../redux/store";
 function MyApp({ Component, pageProps }) {
   return (

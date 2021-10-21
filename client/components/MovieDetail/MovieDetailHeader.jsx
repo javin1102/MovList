@@ -1,10 +1,9 @@
 import MovieDescription from "./MovieDetailHeader/MovieDescription";
-import MovieDetailPoster from "./MovieDetailHeader/MoviePoster";
-
+import MovieCard from "../UI/MovieCard";
 const MovieHeader = ({ movie }) => {
   return (
     <div className="flex">
-      <MovieDetailPoster poster={movie.poster_path} />
+      <MovieCard poster={movie.poster_path} />
       <MovieDescription movie={movie} />
     </div>
   );

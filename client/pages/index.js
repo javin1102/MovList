@@ -1,11 +1,10 @@
 import Header from "../components/Header/Header";
 import Nav from "../components/Nav/Nav";
 import MoviesListSlider from "../components/Movies/MovieListSlider";
-import { client } from "../utils/ApolloClient";
-import { ApolloProvider } from "@apollo/client";
 import MovieAPI from "../utils/MovieApi";
 import Footer from "../components/Footer/Footer";
-
+import { ApolloProvider } from "@apollo/client";
+import { client } from "../utils/ApolloClient";
 export default function Home({
   upcoming,
   popular,

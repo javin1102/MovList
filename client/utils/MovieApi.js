@@ -258,4 +258,18 @@ export default class MovieAPI {
     ];
     return moviesId;
   }
+  static async getSearchMovies(query) {
+    const searchMovie = await client.query({
+      query: gql`
+        query {
+          search(query: "${query}") {
+            id
+            title
+            poster_path
+          }
+        }
+      `,
+    });
+    return searchMovie.data.search;
+  }
 }

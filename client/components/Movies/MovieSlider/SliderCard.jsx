@@ -3,9 +3,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 const SliderCard = ({ movieTitle, poster, id }) => {
   const router = useRouter();
-  const handleClick = (e) => {
-    router.push(`/movie/${id}`);
-  };
 
   return (
     <Link href={`/movie/${id}`}>
