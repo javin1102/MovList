@@ -22,7 +22,7 @@ const Nav = ({ isHomePage }) => {
   const navBrandColor = isTop && isHomePage ? "text-white" : "text-black";
   const signButtonText = session ? "Sign Out" : "Sign In";
   const signButtonHandler = () => {
-    if (!session) signIn();
+    if (!session) signIn("google");
     else {
       signOut();
     }
