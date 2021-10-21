@@ -5,6 +5,9 @@ import MovieAPI from "../utils/MovieApi";
 import Footer from "../components/Footer/Footer";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "../utils/ApolloClient";
+import { useEffect } from "react";
+import { commentAction } from "../redux/comment-slice";
+import { useDispatch } from "react-redux";
 export default function Home({
   upcoming,
   popular,
@@ -13,6 +16,10 @@ export default function Home({
   top_rated,
   carousel,
 }) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(commentAction.reset());
+  }, []);
   return (
     <ApolloProvider client={client}>
       <Nav isHomePage={true} />

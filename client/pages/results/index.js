@@ -9,6 +9,7 @@ import Link from "next/link";
 import Loader from "react-loader-spinner";
 import { uiAction } from "../../redux/ui-slice";
 import { useDispatch, useSelector } from "react-redux";
+import { commentAction } from "../../redux/comment-slice";
 const Results = () => {
   const [results, setResults] = useState([]);
   const router = useRouter();
@@ -23,6 +24,10 @@ const Results = () => {
       dispatch(uiAction.setGetLoading({ getLoading: false }));
     }
   }, [search]);
+
+  useEffect(() => {
+    dispatch(commentAction.reset());
+  }, []);
 
   return (
     <ApolloProvider client={client}>

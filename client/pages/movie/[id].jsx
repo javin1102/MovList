@@ -5,8 +5,15 @@ import MovieSynopsis from "../../components/MovieDetail/MovieDetailSynopsis";
 import CommenSection from "../../components/Comment/CommentSection";
 import SimilarMovieLayout from "../../components/MovieDetail/SimilarMovie/SimilarMovieLayout";
 import MovieAPI from "../../utils/MovieApi";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { commentAction } from "../../redux/comment-slice";
 
 const MovieDetail = ({ movie, similar_movie }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(commentAction.reset());
+  }, []);
   return (
     <>
       <div id="modal"></div>
