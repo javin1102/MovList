@@ -6,6 +6,8 @@ export default NextAuth({
     Providers.Google({
       clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
       clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
+      id: "google",
+      name: "google",
       profile(profile) {
         return {
           id: profile.id,
@@ -22,5 +24,8 @@ export default NextAuth({
       session.user.id = user.sub;
       return Promise.resolve(session);
     },
+  },
+  theme: {
+    colorScheme: "light",
   },
 });
