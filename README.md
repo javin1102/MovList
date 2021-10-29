@@ -20,3 +20,4 @@ This app feature:
 - Add Comment in movie detail page
 - Lazy Load Comments
 - Auth with google OAuth
+- Search Movies
