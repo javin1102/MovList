@@ -18,4 +18,5 @@ This app feature:
   - Similar Movies
   - Popular Movies
 - Add Comment in movie detail page
+- Lazy Load Comments
 - Auth with google OAuth
