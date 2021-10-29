@@ -8,7 +8,7 @@ This app is build with:
 - React-Slick
 - TailwindCSS
 - GraphQL
-- Redux / Redux-toolkit
+- Redux / Redux-toolkit / Redux-thunk for movie and comment states
 
 This app feature:
 - Show
