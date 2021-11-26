@@ -1,6 +1,6 @@
 # MovList
 This is a movie app that helps you get to know a movie. 
-![image](https://user-images.githubusercontent.com/61945507/143535007-da3add72-2662-4611-9021-d9f8231935fc.png)
+![image](https://user-images.githubusercontent.com/61945507/143535112-b0b8ad88-e364-43d5-90a5-bd4f4dab5a40.png)
 
 
 This app is build with:
