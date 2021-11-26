@@ -20,6 +20,6 @@ This app feature:
   - Similar Movies
   - Popular Movies
 - Add Comment in movie detail page
-- Lazy Load Comments (https://mov-list-chi.vercel.app/movie/278)
+- Lazy Load Comments (See it working: https://mov-list-chi.vercel.app/movie/278)
 - Auth with google OAuth
 - Search Movies
