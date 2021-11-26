@@ -12,7 +12,7 @@ This app is build with:
 - GraphQL
 - Redux / Redux-toolkit / Thunk for movie and comment states
 
-This app feature:
+This app features:
 - Show
   - Top rated Movies
   - Recommended Movies
